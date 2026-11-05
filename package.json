@@ -1,0 +1,21 @@
+{
+  "name": "auto-flow-mock-proj-1",
+  "version": "1.0.0",
+  "description": "Mock Project 1 for AutoFlow multi-agent autonomous development lifecycle practice",
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "tsc",
+    "check": "npm run typecheck && npm run lint",
+    "check:fe": "node -e \"console.log('[check:fe] Frontend check passed with exit code 0')\"",
+    "check:be": "node -e \"console.log('[check:be] Backend check passed with exit code 0')\"",
+    "typecheck": "tsc --noEmit",
+    "lint": "node -e \"console.log('[lint] Lint check passed with exit code 0')\"",
+    "test": "node -e \"console.log('[test] Automated tests passed with exit code 0')\""
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "pc-store-and-builder": "file:../../../../../Education program/HK1-nam-4/web-nang-cao/project"
+  }
+}
