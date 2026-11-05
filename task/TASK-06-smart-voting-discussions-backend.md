@@ -5,7 +5,7 @@
 - Governing Technical Spec: [specs/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/smart-voting-discussions/specs/v1.md)
 - Implementation Plan: [implementation-plans/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/smart-voting-discussions/implementation-plans/v1.md)
 - Scope: backend
-- Status: Pending
+- Status: Completed
 
 ## Flow & Spec Traceability
 
@@ -41,14 +41,14 @@ Build strict domain models, Zod validation schemas, atomic voting transaction se
 
 ## Checklist
 
-- [ ] Create `src/types/discussion.ts` defining types for Vote, VoteActivityLog, Comment, CommentReaction, and CommentTreeNode according to Spec Section 2.
-- [ ] Create `src/schemas/vote.schema.ts` and `src/schemas/comment.schema.ts` validating vote toggling, reaction types, and comment content (3 to 5000 characters).
-- [ ] Implement `src/services/voting.service.ts` executing atomic transaction: check post lock status, toggle vote insertion or deletion, apply voterProfile.voteWeight to post totalScoreWeight, update totalVotesCount, and insert vote_activity_logs (Spec AC-01, AC-02, Flow Primary Path 1).
-- [ ] Auto-subscribe voter in `voting.service.ts` by creating post_subscriptions record if not present (Spec AC-05).
-- [ ] Implement `src/services/comment.service.ts` supporting recursive threaded tree building through parentId references (Spec AC-03, Flow Primary Path 2).
-- [ ] Implement internal note authorization guard in `comment.service.ts` filtering out isInternalNote = true comments whenever requester is not an active WorkspaceMember (Spec AC-04).
-- [ ] Ensure all exported functions contain explicit return type annotations and zero any types.
-- [ ] Run `npm run check:be` and verify exit code 0.
+- [x] Create `src/types/discussion.ts` defining types for Vote, VoteActivityLog, Comment, CommentReaction, and CommentTreeNode according to Spec Section 2.
+- [x] Create `src/schemas/vote.schema.ts` and `src/schemas/comment.schema.ts` validating vote toggling, reaction types, and comment content (3 to 5000 characters).
+- [x] Implement `src/services/voting.service.ts` executing atomic transaction: check post lock status, toggle vote insertion or deletion, apply voterProfile.voteWeight to post totalScoreWeight, update totalVotesCount, and insert vote_activity_logs (Spec AC-01, AC-02, Flow Primary Path 1).
+- [x] Auto-subscribe voter in `voting.service.ts` by creating post_subscriptions record if not present (Spec AC-05).
+- [x] Implement `src/services/comment.service.ts` supporting recursive threaded tree building through parentId references (Spec AC-03, Flow Primary Path 2).
+- [x] Implement internal note authorization guard in `comment.service.ts` filtering out isInternalNote = true comments whenever requester is not an active WorkspaceMember (Spec AC-04).
+- [x] Ensure all exported functions contain explicit return type annotations and zero any types.
+- [x] Run `npm run check:be` and verify exit code 0.
 
 ## Acceptance Criteria
 
