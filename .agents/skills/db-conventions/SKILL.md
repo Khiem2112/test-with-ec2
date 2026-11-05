@@ -32,3 +32,4 @@ This skill governs database modeling, schema design, and persistence rules using
 5. Soft Deletes & Active Records:
    - Use `isActive = false` for soft deletion of business-critical entities.
    - All query services must filter active records unless specifically performing administrative audits.
+

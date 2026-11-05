@@ -31,3 +31,4 @@ Depending on the scope assigned by the orchestrator:
 
 - Status: State clearly whether all commands exited with code 0.
 - Raw Failure Logs: If any check fails, extract and report the relevant error output including file paths and error codes to assist immediate remediation.
+

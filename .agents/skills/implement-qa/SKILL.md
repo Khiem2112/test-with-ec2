@@ -34,3 +34,4 @@ When an agent encounters ambiguous requirements, missing edge-case specification
 3. User Resolution:
    - The user records their decision directly into the QA document.
    - The agent reads the answers, marks status `Resolved`, and proceeds with implementation according to the user's decision.
+

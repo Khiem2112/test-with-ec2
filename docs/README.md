@@ -38,3 +38,4 @@ docs/
 - Reconstruct the active requirement by reading the baseline v1.md plus every subsequent diff in ascending numerical order.
 - A material flow or spec change must receive explicit approval in its new diff before implementation begins.
 - Flow and Spec statuses: Draft, In review, Approved, Superseded.
+

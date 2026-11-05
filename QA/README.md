@@ -9,3 +9,4 @@ To prevent guessing or hallucinating business rules:
 2. The agent halts work on the affected branch until the question is answered.
 3. The human operator reads the question, selects an option or provides instructions, and updates the file.
 4. The agent reads the resolved decision and continues implementation.
+

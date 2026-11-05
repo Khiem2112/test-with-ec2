@@ -84,3 +84,4 @@ At each declared checkpoint, run `code-review`:
 2. Re-run automated verification checks (`npm run check`) ensuring exit code 0.
 3. Re-run the review pass for the affected scope until verdict is `PASS`.
 4. Execute safe git commit with Conventional Commits format and plain text only.
+

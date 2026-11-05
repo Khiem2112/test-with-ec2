@@ -13,3 +13,4 @@ export const defaultConfig: AppConfig = {
 export const initializeApp = (config: AppConfig = defaultConfig): string => {
   return `Application ${config.appName} initialized successfully in ${config.environment} mode.`;
 };
+

@@ -6,6 +6,7 @@
   "scripts": {
     "build": "tsc",
     "check": "npm run typecheck && npm run lint",
+    "test:db": "node test-db.js",
     "check:fe": "node -e \"console.log('[check:fe] Frontend check passed with exit code 0')\"",
     "check:be": "node -e \"console.log('[check:be] Backend check passed with exit code 0')\"",
     "typecheck": "tsc --noEmit",

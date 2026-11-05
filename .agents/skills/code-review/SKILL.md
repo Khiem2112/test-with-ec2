@@ -38,3 +38,4 @@ This skill routes review requests to the appropriate review methodology and auth
 - Low: Informational note or cosmetic improvement.
 
 All Critical and High findings must be resolved and re-reviewed before commit authorization.
+

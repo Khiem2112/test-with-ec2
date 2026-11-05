@@ -29,3 +29,4 @@ The following commands are considered read-only, local static analysis, or stand
 - Destructive git commands (`git reset --hard`, `git clean -f -d`, `git push --force`).
 - Execution of foreign binary executables or unverified remote scripts.
 - Bypass flags (`--dangerously-skip-permissions` is forbidden unless explicitly configured in local settings).
+

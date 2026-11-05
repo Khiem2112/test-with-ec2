@@ -71,3 +71,4 @@ Create this document after the governing flow is approved. This contract defines
 - Scroll Ownership: `<Window scroll vs container scroll>`
 - Sticky Regions: `<Fixed headers or action bars>`
 - Responsive Transformation: `<How tables become stacked cards on mobile>`
+

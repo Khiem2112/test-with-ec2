@@ -30,3 +30,4 @@ foreach ($taskFile in $TaskFiles) {
 }
 
 Write-Host "[Task Runner] All batch tasks executed and committed successfully."
+

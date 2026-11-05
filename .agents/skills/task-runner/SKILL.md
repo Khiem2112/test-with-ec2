@@ -83,3 +83,4 @@ Dispatch dedicated worker subagents (`task-implementer`, `task-reviewer`, `task-
 - Worktree isolation: Use `Workspace: branch` for file modifications.
 - Independent review: Dispatch `task-reviewer` for Pass A and Pass B.
 - Pre-commit gate: Dispatch `task-tester` to verify exit code 0.
+

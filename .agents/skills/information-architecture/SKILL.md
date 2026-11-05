@@ -21,3 +21,4 @@ This skill governs the systematic organization of content, screens, routes, and 
 3. URL Design:
    - Use kebab-case for resource identifiers and routes (`/orders/batch-summary`).
    - Query parameters should be reserved for filtering, sorting, and pagination.
+

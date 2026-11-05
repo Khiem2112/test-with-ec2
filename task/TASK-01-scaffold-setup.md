@@ -35,3 +35,4 @@ Initialize project core modules and declare strict TypeScript models for the moc
 
 - Command 1: `npm run check`
 - Command 2: `npm run typecheck`
+

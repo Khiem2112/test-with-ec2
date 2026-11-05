@@ -35,3 +35,4 @@ When implementation is completed:
 1. Run intermediate verification checks to ensure zero regressions.
 2. Produce a structured completion summary matching `.agents/skills/task-runner/templates/code-completion.md`.
 3. Send completion notice to orchestrator with list of touched files and verification status.
+

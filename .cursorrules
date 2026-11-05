@@ -1,7 +1,15 @@
 # Cursor Rules
 
 You must follow the rules defined in AGENTS.md:
-1. Do not use any emojis or icons anywhere in code, comments, documentation, commit messages, or chat responses.
-2. Do not write numbered comment chains (such as // 1., // Step 1, // Buoc 1). Describe logic directly and technically.
-3. Strict TypeScript: Use type over interface, explicit return types on all functions, and no any types.
-4. Adhere to the dual-pass review process (Functional and Convention) and pre-commit verification gates.
+- Do not use any emojis or icons anywhere in code, comments, documentation, commit messages, or chat responses.
+- Do not write numbered comment chains (such as // 1., // Step 1, // Buoc 1) or trivial comments (// Call API).
+- Strict TypeScript Standards:
+  - Use `type` over `interface`.
+  - Zero `any`: use `unknown` + type narrowing or Zod schemas.
+  - Explicit return types on all functions and exported methods.
+  - Immutability: use spread syntax, never mutate directly, no `Object.assign`.
+  - Use `??` and `?.` instead of `||`.
+  - Use `const` by default, `let` only for reassignment, no `var`.
+  - Clean barrel imports via `index.ts`.
+  - Layering: Pure Utils in `src/utils/` must be stateless (no DB, no API, no file I/O).
+- Adhere to the dual-pass review process (Functional and Convention) and pre-commit verification gates (`npm run check` exit code 0).

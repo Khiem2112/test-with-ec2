@@ -70,3 +70,4 @@ Describe the step-by-step canonical user journey from initiation to success:
 - Failure & Timeout Path:
   - Trigger: <Network failure, external service error, timeout>
   - System Behavior: <Graceful error state, non-destructive fallback, retry button>
+

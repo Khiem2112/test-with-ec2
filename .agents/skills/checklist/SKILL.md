@@ -40,3 +40,4 @@ Before declaring any task complete or creating a commit, verify the implementati
 - Zero Icons and Emojis: Verify no icons or emojis exist in code, comments, logs, or commit messages.
 - Zero Numbered Comments: Verify comments explain technical rationale directly without positional numbers.
 - Minimal Blast Radius: Confirm only files declared in task scope were modified.
+

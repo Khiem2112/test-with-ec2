@@ -18,3 +18,4 @@ This skill guides mapping user experience touchpoints and analyzing system frict
    - Flag redundant data entry steps.
    - Identify confusing status labels or dead-end error pages.
    - Measure cognitive load during multi-step setup workflows.
+

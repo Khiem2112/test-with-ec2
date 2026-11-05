@@ -32,3 +32,4 @@
 ## Next Phase
 
 Trigger Stage 5: Dual-Pass Review (Functional Review + Convention Review).
+

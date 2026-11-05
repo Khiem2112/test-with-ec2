@@ -10,10 +10,22 @@ This workspace serves as Mock Project 1 (proj-1) under the AutoFlow framework. I
 ## 2. Non-Negotiable Engineering Constraints
 
 - Zero Icons and Emojis: Source code, documentation, test logs, commit messages, and agent communication must never contain icons or emojis.
-- Zero Numbered Comments: Comments in code must describe technical rationale, architectural intent, or operational logic directly. Positional step chains (such as // 1., // Step 1, // Buoc 1) are strictly prohibited.
+- Zero Numbered Comments: Comments in code must describe technical rationale, architectural intent, or operational logic directly. Positional step chains (such as // 1., // Step 1, // Buoc 1) and trivial comments (such as // Call API) are strictly prohibited.
+- Strict TypeScript Standards (.agents/skills/typescript/SKILL.md):
+  - Always use `type` instead of `interface` for props, state, payloads, and object shapes.
+  - Zero `any`: The `any` type is strictly forbidden. Use `unknown` with type guards, discriminated unions, or Zod schemas.
+  - Explicit return types: Every exported function, service, controller, and handler must declare an explicit return type.
+  - Immutability: Never mutate objects or arrays in-place; use spread syntax (`[...arr]`, `{...obj}`). Do not use `Object.assign`.
+  - Nullish coalescing: Use `??` and `?.` instead of `||` to prevent falsy value bugs (`0`, `""`).
+  - No `var`: Use `const` by default, `let` only for reassignment.
+  - Clean imports: Use barrel files (`index.ts`) instead of deep relative internal paths.
+  - Persistence & DTO safety: Derive query payloads and DTOs using `Pick`, `Omit`, or `z.infer`. Never manually duplicate Prisma model fields into redundant DTOs. Never expose sensitive internal fields to client projections.
+- Architectural Layering (.agents/rules/RULE.md):
+  - Controllers parse requests, validate input schemas, and format HTTP responses.
+  - Services encapsulate business logic, domain rules, and database transactions.
+  - Pure Utils (`src/utils/`) must be stateless with zero database calls, zero API calls, and zero file I/O.
 - Minimal Blast Radius: Modify only files explicitly designated in the approved task definition. Opportunistic refactoring outside task boundaries is forbidden.
-- Strict Type Safety: Use type declarations over interface. Explicit return types are required on all functions. The any type is strictly forbidden; use unknown with type narrowing or discriminated unions.
-- Hard Pre-Commit Verification Gate: Every commit requires all automated checks (typecheck, lint, build) to exit with code 0.
+- Hard Pre-Commit Verification Gate: Every commit requires all automated checks (`npx tsc --noEmit` and `npm run check`) to exit with code 0.
 
 ## 3. Autonomous Multi-Agent Architecture
 
@@ -68,3 +80,4 @@ Do not load all skills at startup. Load the minimal relevant subset on demand:
 
 Follow the provider-neutral execution policy in .agents/rules/command-whitelist.md.
 Allowlisted commands (npm run check, npm run lint, tsc --noEmit, git status, git diff) execute without prompting. Commands outside the whitelist require user approval.
+

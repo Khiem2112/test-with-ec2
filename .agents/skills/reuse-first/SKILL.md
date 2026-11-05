@@ -25,3 +25,4 @@ Before creating any new file, abstraction, utility function, or schema, inspect 
 ## Review Gate
 
 During convention review, reject new utility functions or duplicate schemas if identical logic already exists within the repository.
+

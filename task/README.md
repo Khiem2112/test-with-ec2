@@ -29,3 +29,4 @@ This directory holds atomic, bounded task files executed by the autonomous multi
 | Task ID | Title | Scope | Status | Review Verdict |
 | :--- | :--- | :--- | :--- | :--- |
 | `TASK-01` | Scaffold and Core Types Setup | `shared` | `Pending` | `Pending` |
+

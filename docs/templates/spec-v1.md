@@ -89,3 +89,4 @@ Inspect existing repository modules before defining changes:
 | `1` | `<Data layer & schema>` | `database` | `None` | `both` | `npm run check` | `Schema migrated, models valid` |
 | `2` | `<Core business service>` | `backend` | `Phase 1` | `both` | `npm run check` | `Unit tests pass, typecheck 0` |
 | `3` | `<UI component & wiring>` | `frontend` | `Phase 2` | `both` | `npm run check` | `Component renders, forms validate` |
+

@@ -24,3 +24,4 @@ Describe the specific business, architectural, or functional reasons for this de
 ### Removed / Deprecated Requirements
 - Deprecate `<Section Name>`:
   `<Explanation of why this behavior is removed>`
+

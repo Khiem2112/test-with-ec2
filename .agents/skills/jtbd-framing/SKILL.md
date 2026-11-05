@@ -20,3 +20,4 @@ This skill applies the Jobs-to-be-Done methodology to ground product features in
 3. Hire & Fire Criteria:
    - Hire criteria: What must this feature do exceptionally well to be chosen?
    - Fire criteria: What unacceptable friction would cause the user to abandon this workflow?
+
