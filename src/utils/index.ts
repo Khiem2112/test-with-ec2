@@ -37,3 +37,4 @@ export const isRecordObject = (value: unknown): value is Record<string, unknown>
 export const appendItem = <T>(list: readonly T[], item: T): readonly T[] => {
   return [...list, item];
 };
+

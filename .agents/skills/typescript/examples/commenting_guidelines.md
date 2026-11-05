@@ -70,3 +70,4 @@ export function validateGrounding(response: RagResponse, context: FullCustomerCo
   };
 }
 ```
+

@@ -72,9 +72,17 @@ Templates are located in `.agents/skills/task-runner/templates/`:
 Use within the current conversation when tasks are tightly coupled and modify fewer than 4 files in total.
 
 ### Strategy 2: New Session Per Task (Recommended Default)
-Execute tasks sequentially across clean sessions. In batch mode, run:
+Execute tasks sequentially across clean sessions. In batch mode:
+
+On Windows (PowerShell):
 ```powershell
 .\.agents\skills\task-runner\scripts\run_tasks.ps1 -TaskFiles task/TASK-01.md, task/TASK-02.md
+```
+
+On Linux / macOS (Bash):
+```bash
+chmod +x ./.agents/skills/task-runner/scripts/run_tasks.sh
+./.agents/skills/task-runner/scripts/run_tasks.sh task/TASK-01.md task/TASK-02.md
 ```
 
 ### Strategy 3: Multi-Subagent Orchestration

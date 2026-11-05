@@ -20,9 +20,15 @@ This directory holds atomic, bounded task files executed by the autonomous multi
    /task-runner run task/TASK-01-scaffold-setup.md
    ```
 2. Batch Autonomous Execution:
-   ```powershell
-   .\.agents\skills\task-runner\scripts\run_tasks.ps1 -TaskFiles task/TASK-01-scaffold-setup.md
-   ```
+   - On Windows (PowerShell):
+     ```powershell
+     .\.agents\skills\task-runner\scripts\run_tasks.ps1 -TaskFiles task/TASK-01-scaffold-setup.md
+     ```
+   - On Linux / macOS (Bash):
+     ```bash
+     chmod +x ./.agents/skills/task-runner/scripts/run_tasks.sh
+     ./.agents/skills/task-runner/scripts/run_tasks.sh task/TASK-01-scaffold-setup.md
+     ```
 
 ## Task Progress Tracking
 

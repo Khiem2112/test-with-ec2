@@ -19,6 +19,10 @@ The following commands are considered read-only, local static analysis, or stand
   - `git diff`
   - `git log`
   - `git branch`
+- Task Batch Runners:
+  - `.\.agents\skills\task-runner\scripts\run_tasks.ps1`
+  - `./.agents/skills/task-runner/scripts/run_tasks.sh`
+  - `bash ./.agents/skills/task-runner/scripts/run_tasks.sh`
 - File System Navigation:
   - `ls`, `dir`, `Get-ChildItem`
   - `cat`, `Get-Content`
