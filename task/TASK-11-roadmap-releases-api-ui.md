@@ -5,7 +5,7 @@
 - Governing Technical Spec: [specs/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/roadmap-and-releases/specs/v1.md)
 - Implementation Plan: [implementation-plans/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/roadmap-and-releases/implementation-plans/v1.md)
 - Scope: frontend
-- Status: Pending
+- Status: Completed
 
 ## Flow & Spec Traceability
 
@@ -42,13 +42,13 @@ Deliver API route handlers for roadmap cards, releases, and changelogs, alongsid
 
 ## Checklist
 
-- [ ] Implement `src/app/api/v1/roadmap/route.ts` adhering to Spec Section 4.1 contract returning column groupings.
-- [ ] Implement `src/app/api/v1/releases/route.ts` and `src/app/api/v1/changelogs/route.ts` conforming to Spec Section 4.2.
-- [ ] Implement Server Actions in `src/actions/roadmap.actions.ts` and `src/actions/release.actions.ts`.
-- [ ] Create `src/components/roadmap/kanban-card.tsx` rendering title, vote count pill, category chip, and comments count.
-- [ ] Create `src/components/roadmap/kanban-board.tsx` supporting fluid drag-and-drop operations and category/tag filtering (Flow Touchpoints 1 & 2).
-- [ ] Create `src/components/changelog/changelog-editor.tsx` providing split-screen markdown input with real-time preview (Flow Touchpoint 4).
-- [ ] Run `npm run check` and verify exit code 0.
+- [x] Implement `src/app/api/v1/roadmap/route.ts` adhering to Spec Section 4.1 contract returning column groupings.
+- [x] Implement `src/app/api/v1/releases/route.ts` and `src/app/api/v1/changelogs/route.ts` conforming to Spec Section 4.2.
+- [x] Implement Server Actions in `src/actions/roadmap.actions.ts` and `src/actions/release.actions.ts`.
+- [x] Create `src/components/roadmap/kanban-card.tsx` rendering title, vote count pill, category chip, and comments count.
+- [x] Create `src/components/roadmap/kanban-board.tsx` supporting fluid drag-and-drop operations and category/tag filtering (Flow Touchpoints 1 & 2).
+- [x] Create `src/components/changelog/changelog-editor.tsx` providing split-screen markdown input with real-time preview (Flow Touchpoint 4).
+- [x] Run `npm run check` and verify exit code 0.
 
 ## Acceptance Criteria
 
