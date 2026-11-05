@@ -36,7 +36,7 @@ This directory holds atomic, bounded task files executed by the autonomous multi
 
 | Task ID | Title | Scope | Governing Flow | Governing Spec | Status | Review Verdict |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| `TASK-01` | Scaffold and Core Types Setup | `shared` | System Baseline | Baseline Scaffold Setup | `Pending` | `Pending` |
+| `TASK-01` | Scaffold and Core Types Setup | `shared` | System Baseline | Baseline Scaffold Setup | `Completed` | `Approved` |
 | `TASK-02` | Workspace and Identity Backend Services | `backend` | [workspace-identity/flows/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/workspace-identity/flows/v1.md) | [workspace-identity/specs/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/workspace-identity/specs/v1.md) | `Pending` | `Pending` |
 | `TASK-03` | Workspace and Identity API Handlers and UI Components | `frontend` | [workspace-identity/flows/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/workspace-identity/flows/v1.md) | [workspace-identity/specs/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/workspace-identity/specs/v1.md) | `Pending` | `Pending` |
 | `TASK-04` | Feedback Posts and Deduplication Backend Services | `backend` | [feedback-posts/flows/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/feedback-posts/flows/v1.md) | [feedback-posts/specs/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/feedback-posts/specs/v1.md) | `Pending` | `Pending` |

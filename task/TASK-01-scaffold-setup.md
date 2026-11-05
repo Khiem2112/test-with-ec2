@@ -3,7 +3,7 @@
 - Feature: System Foundation
 - Governing Spec: N/A (Baseline Scaffold Setup)
 - Scope: shared
-- Status: Pending
+- Status: Completed
 
 ## Objective
 
@@ -19,11 +19,11 @@ Initialize project core modules and declare strict TypeScript models for the moc
 
 ## Checklist
 
-- [ ] Create `src/types/index.ts` with strict `type` definitions for User, Project, and Task entities.
-- [ ] Ensure all types use `type` instead of `interface`, zero `any`, and explicit optionality.
-- [ ] Create `src/services/config.service.ts` with pure utility functions for environment resolution.
-- [ ] Verify zero emojis and zero numbered comments in code and docstrings.
-- [ ] Run `npm run check` and verify exit code 0.
+- [x] Create `src/types/index.ts` with strict `type` definitions for User, Project, and Task entities.
+- [x] Ensure all types use `type` instead of `interface`, zero `any`, and explicit optionality.
+- [x] Create `src/services/config.service.ts` with pure utility functions for environment resolution.
+- [x] Verify zero emojis and zero numbered comments in code and docstrings.
+- [x] Run `npm run check` and verify exit code 0.
 
 ## Acceptance Criteria
 
