@@ -3,6 +3,12 @@
 ## 1. Project Overview & Operational Mandate
 
 This workspace serves as Mock Project 1 (proj-1) under the AutoFlow framework. It is specifically configured for practicing end-to-end autonomous multi-agent software engineering:
+- Finalized Tech Stack:
+  - Framework: Next.js 15 (App Router with Server Components and Server Actions)
+  - Styling: Tailwind CSS v4 with clsx and tailwind-merge (via `@/lib/cn`)
+  - Database & ORM: Prisma Client with schema in `prisma/schema.prisma` (SQLite for local mock, configurable to PostgreSQL)
+  - Validation: Zod schemas (`z.infer` for type derivation)
+  - Type System: Strict TypeScript 5.4+ (`type` over `interface`, zero `any`, explicit return types)
 - Autonomous Design: Transforming high-level ideas into approved behavioral flows, UI contracts, technical specifications, and phase-gated implementation plans.
 - Autonomous Implementation: Executing atomic tasks bounded strictly to assigned checklists with zero collateral edits and strict convention enforcement.
 - Autonomous Review & Verification: Conducting independent dual-pass reviews (Functional and Convention), remediating findings, verifying automated pre-commit gates, and executing safe git commits.

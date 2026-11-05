@@ -2,21 +2,21 @@ export type UserRole = "admin" | "operator" | "viewer";
 
 export type BaseEntity = {
   id: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date | string;
+  updatedAt: Date | string;
   isActive: boolean;
 };
 
 export type User = BaseEntity & {
-  username: string;
   email: string;
+  name: string;
   role: UserRole;
 };
 
 export type Project = BaseEntity & {
   name: string;
   slug: string;
-  description?: string;
+  description: string | null;
   ownerId: string;
 };
 
@@ -30,7 +30,14 @@ export type Task = BaseEntity & {
   checklist: readonly string[];
 };
 
-export type UserSummaryDTO = Pick<User, "id" | "username" | "email" | "role">;
+export type UserSummaryDTO = Pick<User, "id" | "name" | "email" | "role">;
+
+export type CreateTaskInput = {
+  projectId: string;
+  title: string;
+  targetFiles?: readonly string[];
+  checklist?: readonly string[];
+};
 
 export type ApiResponse<T> =
   | {
@@ -44,4 +51,3 @@ export type ApiResponse<T> =
         message: string;
       };
     };
-

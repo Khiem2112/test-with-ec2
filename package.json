@@ -2,21 +2,44 @@
   "name": "auto-flow-mock-proj-1",
   "version": "1.0.0",
   "description": "Mock Project 1 for AutoFlow multi-agent autonomous development lifecycle practice",
-  "main": "src/index.ts",
-  "scripts": {
-    "build": "tsc",
-    "check": "npm run typecheck && npm run lint",
-    "test:db": "node test-db.js",
-    "check:fe": "node -e \"console.log('[check:fe] Frontend check passed with exit code 0')\"",
-    "check:be": "node -e \"console.log('[check:be] Backend check passed with exit code 0')\"",
-    "typecheck": "tsc --noEmit",
-    "lint": "node -e \"console.log('[lint] Lint check passed with exit code 0')\"",
-    "test": "node -e \"console.log('[test] Automated tests passed with exit code 0')\""
+  "private": true,
+  "prisma": {
+    "schema": "prisma/schema.prisma"
   },
-  "devDependencies": {
-    "typescript": "^5.4.5"
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "check": "npm run typecheck && npm run lint",
+    "check:fe": "npm run check",
+    "check:be": "npm run typecheck",
+    "typecheck": "tsc --noEmit",
+    "lint": "next lint",
+    "test": "node -e \"console.log('[test] Automated tests passed with exit code 0')\"",
+    "prisma:generate": "prisma generate",
+    "prisma:push": "prisma db push",
+    "prisma:migrate": "prisma migrate dev"
   },
   "dependencies": {
-    "pc-store-and-builder": "file:../../../../../Education program/HK1-nam-4/web-nang-cao/project"
+    "@prisma/client": "^6.4.0",
+    "clsx": "^2.1.1",
+    "next": "^15.2.0",
+    "pc-store-and-builder": "file:../../../../../Education program/HK1-nam-4/web-nang-cao/project",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tailwind-merge": "^3.0.2",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.0.0",
+    "@types/node": "^20.17.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "eslint": "^9.0.0",
+    "eslint-config-next": "^15.2.0",
+    "postcss": "^8.4.49",
+    "prisma": "^6.4.0",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.4.5"
   }
 }

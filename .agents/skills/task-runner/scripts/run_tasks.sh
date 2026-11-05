@@ -33,3 +33,4 @@ for task_file in "$@"; do
 done
 
 echo "[Task Runner] All batch tasks executed and committed successfully."
+
