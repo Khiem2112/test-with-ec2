@@ -5,7 +5,7 @@
 - Governing Technical Spec: [specs/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/smart-voting-discussions/specs/v1.md)
 - Implementation Plan: [implementation-plans/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/smart-voting-discussions/implementation-plans/v1.md)
 - Scope: frontend
-- Status: Pending
+- Status: Completed
 
 ## Flow & Spec Traceability
 
@@ -42,13 +42,13 @@ Build API route handlers for vote toggling and threaded discussions, alongside h
 
 ## Checklist
 
-- [ ] Implement `src/app/api/v1/posts/[id]/vote/route.ts` adhering to Spec Section 4.1 contract with lock verification and error handling.
-- [ ] Implement `src/app/api/v1/posts/[id]/comments/route.ts` adhering to Spec Section 4.2 contract for public discussions and staff notes.
-- [ ] Implement Server Actions in `src/actions/vote.actions.ts` and `src/actions/comment.actions.ts`.
-- [ ] Create `src/components/discussions/vote-button.tsx` providing instant Optimistic UI state toggling and click debounce (Flow Primary Path 1).
-- [ ] Create `src/components/discussions/comment-composer.tsx` with Markdown toolbar and staff-only internal note switcher tab (Flow Touchpoint 3).
-- [ ] Create `src/components/discussions/comment-thread.tsx` rendering recursive reply trees with distinct yellow/amber styling for internal notes (Flow Touchpoint 4).
-- [ ] Run `npm run check` and verify exit code 0.
+- [x] Implement `src/app/api/v1/posts/[id]/vote/route.ts` adhering to Spec Section 4.1 contract with lock verification and error handling.
+- [x] Implement `src/app/api/v1/posts/[id]/comments/route.ts` adhering to Spec Section 4.2 contract for public discussions and staff notes.
+- [x] Implement Server Actions in `src/actions/vote.actions.ts` and `src/actions/comment.actions.ts`.
+- [x] Create `src/components/discussions/vote-button.tsx` providing instant Optimistic UI state toggling and click debounce (Flow Primary Path 1).
+- [x] Create `src/components/discussions/comment-composer.tsx` with Markdown toolbar and staff-only internal note switcher tab (Flow Touchpoint 3).
+- [x] Create `src/components/discussions/comment-thread.tsx` rendering recursive reply trees with distinct yellow/amber styling for internal notes (Flow Touchpoint 4).
+- [x] Run `npm run check` and verify exit code 0.
 
 ## Acceptance Criteria
 
