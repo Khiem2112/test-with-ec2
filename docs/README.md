@@ -39,3 +39,15 @@ docs/
 - A material flow or spec change must receive explicit approval in its new diff before implementation begins.
 - Flow and Spec statuses: Draft, In review, Approved, Superseded.
 
+## Active Feature Specifications Index
+
+| Feature Directory | Operational Flow | Technical Specification | Scope & Core Responsibilities |
+| :--- | :--- | :--- | :--- |
+| `workspace-identity` | [flows/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/workspace-identity/flows/v1.md) | [specs/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/workspace-identity/specs/v1.md) | Quan tri khong gian lam viec da to chuc, phan quyen RBAC va dinh danh VoterProfile (Registered, SSO JWT, Anonymous Fingerprint) |
+| `feedback-posts` | [flows/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/feedback-posts/flows/v1.md) | [specs/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/feedback-posts/specs/v1.md) | Tiep nhan gop y, tim kiem tuong dong chong trung lap (pg_trgm deduplication), quan ly Board, Category, Tag va tep dinh kem |
+| `smart-voting-discussions` | [flows/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/smart-voting-discussions/flows/v1.md) | [specs/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/smart-voting-discussions/specs/v1.md) | Binh chon thong minh voi trong so theo cap bac tai khoan, giao dich nguyen tu toggle vote, thao luan da tang va ghi chu ky thuat noi bo |
+| `post-lifecycle-merge` | [flows/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/post-lifecycle-merge/flows/v1.md) | [specs/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/post-lifecycle-merge/specs/v1.md) | Vong doi trang thai tuy bien, dong co gop bai trung lap nguyen tu (Post Merge Engine) bao toan du lieu va so nhat ky trang thai |
+| `roadmap-and-releases` | [flows/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/roadmap-and-releases/flows/v1.md) | [specs/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/roadmap-and-releases/specs/v1.md) | Bang lo trinh Kanban tuong tac keo tha, quan ly phien ban phat hanh (ReleaseVersion) va xuat ban nhat ky thay doi (Changelog) |
+| `notifications-and-webhooks` | [flows/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/notifications-and-webhooks/flows/v1.md) | [specs/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/notifications-and-webhooks/specs/v1.md) | Tu dong dang ky theo doi, thong bao in-app, phat su kien Webhooks co chu ky HMAC SHA-256 va so kiem toan he thong (AuditLog) |
+
+

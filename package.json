@@ -4,7 +4,8 @@
   "description": "Mock Project 1 for AutoFlow multi-agent autonomous development lifecycle practice",
   "private": true,
   "prisma": {
-    "schema": "prisma/schema.prisma"
+    "schema": "prisma/schema.prisma",
+    "seed": "npx tsx prisma/seed.ts"
   },
   "scripts": {
     "dev": "next dev",
@@ -18,7 +19,8 @@
     "test": "node -e \"console.log('[test] Automated tests passed with exit code 0')\"",
     "prisma:generate": "prisma generate",
     "prisma:push": "prisma db push",
-    "prisma:migrate": "prisma migrate dev"
+    "prisma:migrate": "prisma migrate dev",
+    "seed": "npx tsx prisma/seed.ts"
   },
   "dependencies": {
     "@prisma/client": "^6.4.0",

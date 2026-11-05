@@ -11,3 +11,4 @@ next-env.d.ts
 dev.db
 dev.db-journal
 .DS_Store
+src/generated/
