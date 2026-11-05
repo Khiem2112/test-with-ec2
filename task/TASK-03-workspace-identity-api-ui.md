@@ -5,7 +5,7 @@
 - Governing Technical Spec: [specs/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/workspace-identity/specs/v1.md)
 - Implementation Plan: [implementation-plans/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/workspace-identity/implementation-plans/v1.md)
 - Scope: frontend
-- Status: Pending
+- Status: Completed
 
 ## Flow & Spec Traceability
 
@@ -43,13 +43,13 @@ Deliver Next.js App Router API route handlers, Server Actions, and user-facing o
 
 ## Checklist
 
-- [ ] Implement `src/app/api/v1/workspaces/route.ts` handling POST requests conforming to Spec Section 4.1 contract with HTTP 201/409 responses.
-- [ ] Implement `src/app/api/v1/voter-profiles/resolve/route.ts` conforming to Spec Section 4.2 contract.
-- [ ] Implement Server Actions in `src/actions/workspace.actions.ts` with RBAC permission validation checking for OWNER and ADMIN roles.
-- [ ] Create `src/components/workspace/workspace-onboarding-form.tsx` featuring kebab-case auto-slug formatting, real-time slug collision check, branding color pickers, and live branding preview.
-- [ ] Create `src/components/workspace/team-members-drawer.tsx` supporting staff invitation by email and role assignment (Product Manager, Developer, Moderator).
-- [ ] Create `src/components/workspace/voter-identity-modal.tsx` implementing the Voter Profile Identification touchpoint.
-- [ ] Run `npm run check` and verify exit code 0.
+- [x] Implement `src/app/api/v1/workspaces/route.ts` handling POST requests conforming to Spec Section 4.1 contract with HTTP 201/409 responses.
+- [x] Implement `src/app/api/v1/voter-profiles/resolve/route.ts` conforming to Spec Section 4.2 contract.
+- [x] Implement Server Actions in `src/actions/workspace.actions.ts` with RBAC permission validation checking for OWNER and ADMIN roles.
+- [x] Create `src/components/workspace/workspace-onboarding-form.tsx` featuring kebab-case auto-slug formatting, real-time slug collision check, branding color pickers, and live branding preview.
+- [x] Create `src/components/workspace/team-members-drawer.tsx` supporting staff invitation by email and role assignment (Product Manager, Developer, Moderator).
+- [x] Create `src/components/workspace/voter-identity-modal.tsx` implementing the Voter Profile Identification touchpoint.
+- [x] Run `npm run check` and verify exit code 0.
 
 ## Acceptance Criteria
 
