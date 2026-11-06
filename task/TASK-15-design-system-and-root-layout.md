@@ -4,7 +4,7 @@
 - Governing Flow: [docs/workspace-identity/flows/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/workspace-identity/flows/v1.md)
 - Governing Spec: [docs/workspace-identity/specs/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/workspace-identity/specs/v1.md)
 - Scope: frontend
-- Status: Pending
+- Status: Completed
 
 ## Flow and Spec Traceability
 
@@ -43,13 +43,13 @@ Establish the global design system tokens, CSS stylesheet, Root Layout, Root Lan
 
 ## Checklist
 
-- [ ] Create `src/app/globals.css` declaring CSS variables for canvas (#010102), surface panels (#0f1011, #141516), hairline borders (#23252a), and primary accent (#5e6ad2).
-- [ ] Create `src/context/voter-context.tsx` managing active voter profile (registered or anonymous fingerprint stored in browser local state / cookies).
-- [ ] Create `src/components/layout/public-header.tsx` with workspace branding, navigation links, notification popover integration, and voter identity badge.
-- [ ] Create `src/components/layout/admin-sidebar.tsx` with collapsable navigation links for management views.
-- [ ] Create `src/app/layout.tsx` defining standard HTML and body tags, font declarations, metadata, and wrapping the application in VoterProvider.
-- [ ] Create `src/app/page.tsx` acting as root landing page showing available active workspaces or a link to create a new workspace.
-- [ ] Run `npm run check:be` and verify exit code 0.
+- [x] Create `src/app/globals.css` declaring CSS variables for canvas (#010102), surface panels (#0f1011, #141516), hairline borders (#23252a), and primary accent (#5e6ad2).
+- [x] Create `src/context/voter-context.tsx` managing active voter profile (registered or anonymous fingerprint stored in browser local state / cookies).
+- [x] Create `src/components/layout/public-header.tsx` with workspace branding, navigation links, notification popover integration, and voter identity badge.
+- [x] Create `src/components/layout/admin-sidebar.tsx` with collapsable navigation links for management views.
+- [x] Create `src/app/layout.tsx` defining standard HTML and body tags, font declarations, metadata, and wrapping the application in VoterProvider.
+- [x] Create `src/app/page.tsx` acting as root landing page showing available active workspaces or a link to create a new workspace.
+- [x] Run `npm run check:be` and verify exit code 0.
 
 ## Acceptance Criteria
 

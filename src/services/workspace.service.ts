@@ -180,3 +180,14 @@ export const updateMemberRole = async (
     updatedAt: updated.updatedAt,
   };
 };
+
+// Retrieve all active public or accessible workspaces
+export const listWorkspaces = async (): Promise<Workspace[]> => {
+  const records = await prisma.workspace.findMany({
+    where: { isActive: true },
+    orderBy: { createdAt: "desc" },
+  });
+
+  return records.map(mapWorkspaceRecord);
+};
+
