@@ -39,65 +39,60 @@ const CommentItem = ({
   return (
     <div
       className={cn(
-        "rounded-lg p-3 transition-colors",
+        "rounded-xl p-4 transition-colors",
         node.isInternalNote
-          ? "border-2 border-amber-400 bg-amber-50/70"
-          : "border border-gray-200 bg-white",
+          ? "border border-amber-500/40 bg-amber-950/20"
+          : "border border-[#23252a] bg-[#0f1011]"
       )}
     >
-      {/* Internal Note Banner Pill */}
       {node.isInternalNote && (
-        <div className="mb-2 px-2.5 py-1 bg-amber-200/80 text-amber-900 font-bold text-[11px] rounded flex items-center justify-between">
+        <div className="mb-2 px-2.5 py-1 bg-amber-500/20 border border-amber-500/30 text-amber-300 font-bold text-[10px] rounded flex items-center justify-between">
           <span>GHI CHU NOI BO</span>
-          <span className="font-normal text-[10px]">Chi thanh vien doi ngu moi nhin thay</span>
+          <span className="font-normal text-[10px] text-amber-400">Chi thanh vien doi ngu moi nhin thay</span>
         </div>
       )}
 
-      {/* Header: Author and timestamp */}
       <div className="flex items-center justify-between text-xs">
         <div className="flex items-center gap-2">
-          <span className="font-bold text-gray-900">{node.authorName}</span>
+          <span className="font-semibold text-[#f7f8f8]">{node.authorName}</span>
           {node.isPinned && (
-            <span className="px-1.5 py-0.2 bg-amber-100 text-amber-800 text-[10px] font-semibold rounded">
+            <span className="px-1.5 py-0.5 bg-[#5e6ad2]/20 text-[#828fff] text-[10px] font-semibold rounded border border-[#5e6ad2]/30">
               Ghim
             </span>
           )}
           {node.authorUserId && (
-            <span className="px-1.5 py-0.2 bg-blue-100 text-blue-700 text-[10px] font-medium rounded">
+            <span className="px-1.5 py-0.5 bg-[#18191a] text-[#828fff] text-[10px] font-medium rounded border border-[#23252a]">
               Doi Ngu
             </span>
           )}
         </div>
-        <span className="text-[11px] text-gray-400">
+        <span className="text-[11px] text-[#62666d]">
           {new Date(node.createdAt).toLocaleDateString()}
         </span>
       </div>
 
-      {/* Content */}
-      <div className="mt-1.5 text-xs text-gray-800 whitespace-pre-wrap leading-relaxed">
+      <div className="mt-2 text-xs text-[#d0d6e0] whitespace-pre-wrap leading-relaxed">
         {node.content}
       </div>
 
-      {/* Actions toolbar */}
-      <div className="mt-2.5 flex items-center gap-3 text-[11px]">
+      <div className="mt-3 flex items-center gap-3 text-[11px]">
         <button
           type="button"
           onClick={() => setIsReplying(!isReplying)}
-          className="text-blue-600 hover:text-blue-800 font-medium cursor-pointer"
+          className="text-[#5e6ad2] hover:text-[#828fff] font-medium cursor-pointer transition-colors"
         >
           {isReplying ? "Huy tra loi" : "Tra loi"}
         </button>
 
         {node.reactions && node.reactions.length > 0 && (
-          <div className="flex items-center gap-1.5 text-gray-500">
-            <span className="font-mono">+{node.reactions.length} phan ung</span>
+          <div className="flex items-center gap-1.5 text-[#62666d]">
+            <span>+{node.reactions.length} phan ung</span>
           </div>
         )}
       </div>
 
-      {/* Inline Reply Composer */}
       {isReplying && (
-        <div className="mt-3 pl-3 border-l-2 border-blue-400">
+        <div className="mt-3 pl-3 border-l-2 border-[#5e6ad2]">
           <CommentComposer
             postId={postId}
             parentId={node.id}
@@ -109,9 +104,8 @@ const CommentItem = ({
         </div>
       )}
 
-      {/* Nested Replies Tree */}
       {node.replies && node.replies.length > 0 && (
-        <div className="mt-3 pl-4 border-l-2 border-gray-200 space-y-2">
+        <div className="mt-3 pl-4 border-l border-[#23252a] space-y-3">
           {node.replies.map((reply) => (
             <CommentItem
               key={reply.id}
@@ -138,20 +132,25 @@ export const CommentThread = ({
 }: CommentThreadProps): React.JSX.Element => {
   return (
     <div className={cn("space-y-4", className)}>
-      <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wide">
-        Thao Luan ({comments.length})
-      </h3>
+      <CommentComposer
+        postId={postId}
+        isTeamMember={isTeamMember}
+        authorUserId={authorUserId}
+        onCommentCreated={onCommentCreated}
+      />
 
       {comments.length === 0 ? (
-        <p className="text-xs text-gray-500 italic p-4 bg-gray-50 rounded border border-gray-200">
-          Chua co binh luan nao. Hay tro thanh nguoi dau tien dong gop y kien.
-        </p>
+        <div className="p-8 text-center bg-[#0f1011] border border-[#23252a] rounded-xl">
+          <p className="text-xs text-[#8a8f98]">
+            Chua co binh luan nao. Hay la nguoi dau tien dong gop y kien cho chu de nay.
+          </p>
+        </div>
       ) : (
         <div className="space-y-3">
-          {comments.map((rootComment) => (
+          {comments.map((node) => (
             <CommentItem
-              key={rootComment.id}
-              node={rootComment}
+              key={node.id}
+              node={node}
               postId={postId}
               isTeamMember={isTeamMember}
               authorUserId={authorUserId}

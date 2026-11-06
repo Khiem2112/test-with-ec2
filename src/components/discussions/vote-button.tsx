@@ -2,6 +2,7 @@
 
 import React, { useState, useRef } from "react";
 import { cn } from "@/lib/cn";
+import { useVoter } from "@/context/voter-context";
 import type { VoteResult } from "@/types/discussion";
 
 export type VoteButtonProps = {
@@ -20,18 +21,25 @@ export const VoteButton = ({
   initialCount,
   initialHasVoted = false,
   voterProfileId,
-  weight = 1.0,
   isLocked = false,
   onVoteChanged,
   className,
 }: VoteButtonProps): React.JSX.Element => {
+  const { voter, setIsModalOpen } = useVoter();
   const [hasVoted, setHasVoted] = useState<boolean>(initialHasVoted);
   const [votesCount, setVotesCount] = useState<number>(initialCount);
   const [isPending, setIsPending] = useState<boolean>(false);
   const lastClickRef = useRef<number>(0);
 
+  const activeVoterId = voterProfileId ?? voter?.id;
+
   const handleToggle = async (): Promise<void> => {
-    if (isLocked || isPending || !voterProfileId) {
+    if (isLocked || isPending) {
+      return;
+    }
+
+    if (!activeVoterId) {
+      setIsModalOpen(true);
       return;
     }
 
@@ -41,7 +49,6 @@ export const VoteButton = ({
     }
     lastClickRef.current = now;
 
-    // Optimistic UI state mutation
     const nextHasVoted = !hasVoted;
     const nextCount = nextHasVoted ? votesCount + 1 : Math.max(0, votesCount - 1);
     setHasVoted(nextHasVoted);
@@ -52,7 +59,7 @@ export const VoteButton = ({
       const response = await fetch(`/api/v1/posts/${postId}/vote`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ voterProfileId }),
+        body: JSON.stringify({ voterProfileId: activeVoterId }),
       });
 
       const result = (await response.json()) as {
@@ -62,7 +69,6 @@ export const VoteButton = ({
       };
 
       if (!response.ok || !result.success || !result.data) {
-        // Rollback optimistic state on failure
         setHasVoted(!nextHasVoted);
         setVotesCount(votesCount);
         return;
@@ -72,7 +78,6 @@ export const VoteButton = ({
       setVotesCount(result.data.totalVotesCount);
       onVoteChanged?.(result.data);
     } catch {
-      // Rollback optimistic state on network exception
       setHasVoted(!nextHasVoted);
       setVotesCount(votesCount);
     } finally {
@@ -86,25 +91,20 @@ export const VoteButton = ({
       disabled={isLocked || isPending}
       onClick={handleToggle}
       className={cn(
-        "inline-flex flex-col items-center justify-center min-w-14 px-3 py-2 rounded border text-xs font-bold transition-all cursor-pointer shadow-xs",
+        "inline-flex flex-col items-center justify-center min-w-14 px-3 py-2 rounded-lg border text-xs font-bold transition-all cursor-pointer",
         hasVoted
-          ? "bg-blue-600 text-white border-blue-600 hover:bg-blue-700"
-          : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50 hover:border-blue-400",
-        isLocked && "opacity-50 cursor-not-allowed bg-gray-100",
-        className,
+          ? "bg-[#5e6ad2] text-white border-[#5e6ad2] hover:bg-[#828fff]"
+          : "bg-[#141516] text-[#8a8f98] border-[#23252a] hover:bg-[#18191a] hover:border-[#5e6ad2] hover:text-[#f7f8f8]",
+        isLocked && "opacity-50 cursor-not-allowed bg-[#18191a]",
+        className
       )}
     >
       <span className="text-[10px] tracking-wider uppercase">
-        {hasVoted ? "VOTED" : "VOTE"}
+        {hasVoted ? "DA CHON" : "BINH CHON"}
       </span>
       <span className="text-base font-extrabold leading-tight">
         {votesCount}
       </span>
-      {weight > 1.0 && (
-        <span className="text-[9px] opacity-80 font-mono">
-          x{weight}
-        </span>
-      )}
     </button>
   );
 };

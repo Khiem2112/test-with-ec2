@@ -2,11 +2,12 @@
 
 import React, { useState } from "react";
 import { cn } from "@/lib/cn";
+import { useVoter } from "@/context/voter-context";
 import type { PostSubscription } from "@/types/notification";
 
 export type SubscriptionToggleProps = {
   postId: string;
-  voterProfileId: string;
+  voterProfileId?: string;
   initialIsSubscribed?: boolean;
   initialNotifyEmail?: boolean;
   initialNotifyInApp?: boolean;
@@ -23,13 +24,21 @@ export const SubscriptionToggle = ({
   onSubscriptionChanged,
   className,
 }: SubscriptionToggleProps): React.JSX.Element => {
+  const { voter, setIsModalOpen } = useVoter();
   const [isSubscribed, setIsSubscribed] = useState<boolean>(initialIsSubscribed);
   const [notifyEmail, setNotifyEmail] = useState<boolean>(initialNotifyEmail);
   const [notifyInApp, setNotifyInApp] = useState<boolean>(initialNotifyInApp);
   const [showPreferences, setShowPreferences] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  const activeVoterId = voterProfileId ?? voter?.id;
+
   const handleToggle = async (): Promise<void> => {
+    if (!activeVoterId) {
+      setIsModalOpen(true);
+      return;
+    }
+
     setIsLoading(true);
     const nextSubscribed = !isSubscribed;
 
@@ -40,7 +49,7 @@ export const SubscriptionToggle = ({
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             postId,
-            voterProfileId,
+            voterProfileId: activeVoterId,
             notifyEmail,
             notifyInApp,
           }),
@@ -57,21 +66,23 @@ export const SubscriptionToggle = ({
         }
       } else {
         await fetch(
-          `/api/v1/notifications/subscribe?postId=${postId}&voterProfileId=${voterProfileId}`,
-          { method: "DELETE" },
+          `/api/v1/notifications/subscribe?postId=${postId}&voterProfileId=${activeVoterId}`,
+          { method: "DELETE" }
         );
         setIsSubscribed(false);
         setShowPreferences(false);
         onSubscriptionChanged?.(null);
       }
     } catch {
-      // Ignore
+      // Background failure fallback
     } finally {
       setIsLoading(false);
     }
   };
 
   const handleUpdateChannels = async (email: boolean, inApp: boolean): Promise<void> => {
+    if (!activeVoterId) return;
+
     setNotifyEmail(email);
     setNotifyInApp(inApp);
 
@@ -81,7 +92,7 @@ export const SubscriptionToggle = ({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           postId,
-          voterProfileId,
+          voterProfileId: activeVoterId,
           notifyEmail: email,
           notifyInApp: inApp,
         }),
@@ -96,66 +107,63 @@ export const SubscriptionToggle = ({
         onSubscriptionChanged?.(result.data);
       }
     } catch {
-      // Ignore
+      // Ignore background preference update error
     }
   };
 
   return (
     <div className={cn("relative inline-block", className)}>
-      <div className="inline-flex rounded-md shadow-2xs">
+      <div className="flex items-center gap-1.5">
         <button
           type="button"
           disabled={isLoading}
           onClick={handleToggle}
           className={cn(
-            "px-3 py-1.5 text-xs font-bold rounded-l border cursor-pointer transition-colors",
+            "px-3 py-1.5 rounded-md text-xs font-medium border transition-colors cursor-pointer",
             isSubscribed
-              ? "bg-blue-600 text-white border-blue-600 hover:bg-blue-700"
-              : "bg-white text-gray-700 border-gray-300 hover:bg-gray-50",
+              ? "bg-[#18191a] text-[#828fff] border-[#5e6ad2]/50 hover:bg-[#141516]"
+              : "bg-[#141516] text-[#8a8f98] border-[#23252a] hover:text-[#f7f8f8] hover:bg-[#18191a]"
           )}
         >
-          {isLoading
-            ? "Dang xu ly..."
-            : isSubscribed
-              ? "Dang Theo Doi"
-              : "Theo Doi"}
+          {isSubscribed ? "Dang Theo Doi" : "Theo Doi Cap Nhat"}
         </button>
 
         {isSubscribed && (
           <button
             type="button"
             onClick={() => setShowPreferences(!showPreferences)}
-            className="px-2 py-1.5 text-xs font-semibold bg-blue-700 text-white border-l border-blue-500 rounded-r hover:bg-blue-800 cursor-pointer"
+            className="p-1.5 text-xs text-[#8a8f98] hover:text-[#f7f8f8] border border-[#23252a] bg-[#141516] rounded-md cursor-pointer"
+            title="Tuy chon kenh thong bao"
           >
-            Kenh
+            &#9881;
           </button>
         )}
       </div>
 
       {showPreferences && isSubscribed && (
-        <div className="origin-top-right absolute right-0 mt-2 w-64 p-3 rounded-md shadow-lg bg-white ring-1 ring-black/5 z-50 border border-gray-200 text-xs space-y-2">
-          <span className="font-bold text-gray-800 uppercase block text-[10px]">
-            Kenh Thong Bao Tien Do
+        <div className="absolute right-0 mt-2 w-56 rounded-xl border border-[#23252a] bg-[#0f1011] p-3 shadow-xl z-20 space-y-2">
+          <span className="text-[10px] font-bold text-[#62666d] uppercase block">
+            Kenh Nhan Thong Bao
           </span>
 
-          <label className="flex items-center gap-2 cursor-pointer text-gray-700">
+          <label className="flex items-center gap-2 text-xs text-[#d0d6e0] cursor-pointer">
             <input
               type="checkbox"
               checked={notifyInApp}
-              onChange={(e) => void handleUpdateChannels(notifyEmail, e.target.checked)}
-              className="rounded border-gray-300 text-blue-600"
+              onChange={(e) => handleUpdateChannels(notifyEmail, e.target.checked)}
+              className="rounded border-[#23252a] bg-[#141516] text-[#5e6ad2]"
             />
-            Trong ung dung (In-App)
+            <span>Thong bao trong ung dung</span>
           </label>
 
-          <label className="flex items-center gap-2 cursor-pointer text-gray-700">
+          <label className="flex items-center gap-2 text-xs text-[#d0d6e0] cursor-pointer">
             <input
               type="checkbox"
               checked={notifyEmail}
-              onChange={(e) => void handleUpdateChannels(e.target.checked, notifyInApp)}
-              className="rounded border-gray-300 text-blue-600"
+              onChange={(e) => handleUpdateChannels(e.target.checked, notifyInApp)}
+              className="rounded border-[#23252a] bg-[#141516] text-[#5e6ad2]"
             />
-            Hop thu dien tu (Email)
+            <span>Thong bao qua Email</span>
           </label>
         </div>
       )}

@@ -4,7 +4,7 @@
 - Governing Flow: [docs/smart-voting-discussions/flows/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/smart-voting-discussions/flows/v1.md), [docs/notifications-and-webhooks/flows/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/notifications-and-webhooks/flows/v1.md)
 - Governing Spec: [docs/smart-voting-discussions/specs/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/smart-voting-discussions/specs/v1.md)
 - Scope: frontend
-- Status: Pending
+- Status: Completed
 
 ## Flow and Spec Traceability
 
@@ -38,13 +38,13 @@ Deliver the Post Detail page, assembling voting controls, discussion threads (wi
 
 ## Checklist
 
-- [ ] Implement `src/app/[workspaceSlug]/posts/[id]/page.tsx` as a Server Component fetching post details, status, author info, vote count, attachments, and comment tree.
-- [ ] Connect `VoteButton` to `/api/v1/posts/[id]/vote` with optimistic state update and voter identity verification.
-- [ ] Connect `CommentComposer` and `CommentThread` to `/api/v1/posts/[id]/comments`, supporting nested replies and internal note flag for staff members.
-- [ ] Connect `SubscriptionToggle` on the post header, querying and toggling subscription status via Server Actions.
-- [ ] Implement `src/app/[workspaceSlug]/notifications/page.tsx` displaying paginated notifications, filter by unread, and mark-all-read action.
-- [ ] Restyle discussion components to adhere to the Linear dark theme palette (#0f1011 panels, hairline borders).
-- [ ] Run `npm run check` and verify exit code 0.
+- [x] Implement `src/app/[workspaceSlug]/posts/[id]/page.tsx` as a Server Component fetching post details, status, author info, vote count, attachments, and comment tree.
+- [x] Connect `VoteButton` to `/api/v1/posts/[id]/vote` with optimistic state update and voter identity verification.
+- [x] Connect `CommentComposer` and `CommentThread` to `/api/v1/posts/[id]/comments`, supporting nested replies and internal note flag for staff members.
+- [x] Connect `SubscriptionToggle` on the post header, querying and toggling subscription status via Server Actions.
+- [x] Implement `src/app/[workspaceSlug]/notifications/page.tsx` displaying paginated notifications, filter by unread, and mark-all-read action.
+- [x] Restyle discussion components to adhere to the Linear dark theme palette (#0f1011 panels, hairline borders).
+- [x] Run `npm run check` and verify exit code 0.
 
 ## Acceptance Criteria
 

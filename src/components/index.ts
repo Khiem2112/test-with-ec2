@@ -7,6 +7,7 @@ export * from "./posts/board-feed-view";
 export * from "./discussions/vote-button";
 export * from "./discussions/comment-composer";
 export * from "./discussions/comment-thread";
+export * from "./discussions/post-discussion-client";
 export * from "./lifecycle/status-transition-dialog";
 export * from "./lifecycle/merge-drawer";
 export * from "./lifecycle/merged-notice-banner";
