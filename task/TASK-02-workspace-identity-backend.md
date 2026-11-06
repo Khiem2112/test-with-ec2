@@ -5,7 +5,7 @@
 - Governing Technical Spec: [specs/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/workspace-identity/specs/v1.md)
 - Implementation Plan: [implementation-plans/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/workspace-identity/implementation-plans/v1.md)
 - Scope: backend
-- Status: Pending
+- Status: Completed
 
 ## Flow & Spec Traceability
 
@@ -38,14 +38,14 @@ Build strict domain types, Zod schemas, and core backend services for multi-tena
 
 ## Checklist
 
-- [ ] Create `src/types/workspace.ts` defining strict type models for Workspace, WorkspaceMember, UserSession, and VoterProfile according to Spec Section 2.
-- [ ] Create `src/schemas/workspace.schema.ts` defining Zod validation schemas for workspace creation, brandingConfig JSON, member invitation, role mutation, and voter resolution payloads.
-- [ ] Implement `src/services/workspace.service.ts` with createWorkspace, getWorkspaceBySlug, updateWorkspaceBranding, and inviteMember ensuring all queries strictly enforce the Tenant Isolation Invariant.
-- [ ] Enforce automated OWNER role assignment in `workspace.service.ts` when a workspace is created (Spec AC-01, Flow Step Confirmation).
-- [ ] Implement `src/services/identity.service.ts` providing resolveVoterProfile supporting Registered accounts, SSO JWT decoding, and device fingerprint SHA-256 hashing with default voteWeight 1.00 (Spec AC-04, Flow Primary Path 3).
-- [ ] Implement session validation and expiry check in `identity.service.ts` (Spec AC-05).
-- [ ] Ensure all exported functions contain explicit return type annotations and zero any types.
-- [ ] Run `npm run check:be` and verify exit code 0.
+- [x] Create `src/types/workspace.ts` defining strict type models for Workspace, WorkspaceMember, UserSession, and VoterProfile according to Spec Section 2.
+- [x] Create `src/schemas/workspace.schema.ts` defining Zod validation schemas for workspace creation, brandingConfig JSON, member invitation, role mutation, and voter resolution payloads.
+- [x] Implement `src/services/workspace.service.ts` with createWorkspace, getWorkspaceBySlug, updateWorkspaceBranding, and inviteMember ensuring all queries strictly enforce the Tenant Isolation Invariant.
+- [x] Enforce automated OWNER role assignment in `workspace.service.ts` when a workspace is created (Spec AC-01, Flow Step Confirmation).
+- [x] Implement `src/services/identity.service.ts` providing resolveVoterProfile supporting Registered accounts, SSO JWT decoding, and device fingerprint SHA-256 hashing with default voteWeight 1.00 (Spec AC-04, Flow Primary Path 3).
+- [x] Implement session validation and expiry check in `identity.service.ts` (Spec AC-05).
+- [x] Ensure all exported functions contain explicit return type annotations and zero any types.
+- [x] Run `npm run check:be` and verify exit code 0.
 
 ## Acceptance Criteria
 

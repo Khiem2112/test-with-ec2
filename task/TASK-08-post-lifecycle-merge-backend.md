@@ -5,7 +5,7 @@
 - Governing Technical Spec: [specs/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/post-lifecycle-merge/specs/v1.md)
 - Implementation Plan: [implementation-plans/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/post-lifecycle-merge/implementation-plans/v1.md)
 - Scope: backend
-- Status: Pending
+- Status: Completed
 
 ## Flow & Spec Traceability
 
@@ -40,14 +40,14 @@ Build custom post status lifecycle management, audit history logging, and atomic
 
 ## Checklist
 
-- [ ] Create `src/types/lifecycle.ts` defining types for PostStatus, PostStatusHistory, PostMergeHistory, and MergePreviewResult according to Spec Section 2.
-- [ ] Create `src/schemas/lifecycle.schema.ts` defining Zod validation schemas for status transition payloads and merge target validation.
-- [ ] Implement `src/services/status.service.ts` with updatePostStatus executing database transaction: mutating post.statusId, inserting post_status_histories with changeNote, and writing audit_logs (Spec AC-01, AC-02, Flow Primary Path 1).
-- [ ] Implement previewMerge in `src/services/merge-engine.service.ts` calculating transferable votes, duplicate votes to discard, and subscriber migrations (Spec AC-03).
-- [ ] Implement executeMerge in `src/services/merge-engine.service.ts` executing atomic transaction: transfer valid votes, recalculate target post totalVotesCount and totalScoreWeight, migrate subscribers, set source post mergedIntoPostId = target.id, and record post_merge_histories (Spec AC-04, Flow Primary Path 2).
-- [ ] Implement cycle detection in `merge-engine.service.ts` checking for self-merge or recursive merge chains (Spec AC-05, Flow Exception Path).
-- [ ] Ensure all exported functions contain explicit return type annotations and zero any types.
-- [ ] Run `npm run check:be` and verify exit code 0.
+- [x] Create `src/types/lifecycle.ts` defining types for PostStatus, PostStatusHistory, PostMergeHistory, and MergePreviewResult according to Spec Section 2.
+- [x] Create `src/schemas/lifecycle.schema.ts` defining Zod validation schemas for status transition payloads and merge target validation.
+- [x] Implement `src/services/status.service.ts` with updatePostStatus executing database transaction: mutating post.statusId, inserting post_status_histories with changeNote, and writing audit_logs (Spec AC-01, AC-02, Flow Primary Path 1).
+- [x] Implement previewMerge in `src/services/merge-engine.service.ts` calculating transferable votes, duplicate votes to discard, and subscriber migrations (Spec AC-03).
+- [x] Implement executeMerge in `src/services/merge-engine.service.ts` executing atomic transaction: transfer valid votes, recalculate target post totalVotesCount and totalScoreWeight, migrate subscribers, set source post mergedIntoPostId = target.id, and record post_merge_histories (Spec AC-04, Flow Primary Path 2).
+- [x] Implement cycle detection in `merge-engine.service.ts` checking for self-merge or recursive merge chains (Spec AC-05, Flow Exception Path).
+- [x] Ensure all exported functions contain explicit return type annotations and zero any types.
+- [x] Run `npm run check:be` and verify exit code 0.
 
 ## Acceptance Criteria
 

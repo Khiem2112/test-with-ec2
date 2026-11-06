@@ -87,40 +87,306 @@ Prisma.NullTypes = {
  * Enums
  */
 exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
+  ReadUncommitted: 'ReadUncommitted',
+  ReadCommitted: 'ReadCommitted',
+  RepeatableRead: 'RepeatableRead',
   Serializable: 'Serializable'
 });
+
+exports.Prisma.WorkspaceScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  slug: 'slug',
+  customDomain: 'customDomain',
+  brandingConfig: 'brandingConfig',
+  isPublicPortal: 'isPublicPortal',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
 
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
-  name: 'name',
-  role: 'role',
+  fullName: 'fullName',
+  avatarUrl: 'avatarUrl',
+  passwordHash: 'passwordHash',
+  isActive: 'isActive',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  isActive: 'isActive'
+  updatedAt: 'updatedAt'
 };
 
-exports.Prisma.ProjectScalarFieldEnum = {
+exports.Prisma.WorkspaceMemberScalarFieldEnum = {
   id: 'id',
+  workspaceId: 'workspaceId',
+  userId: 'userId',
+  role: 'role',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.UserSessionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  tokenHash: 'tokenHash',
+  ipAddress: 'ipAddress',
+  userAgent: 'userAgent',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.VoterProfileScalarFieldEnum = {
+  id: 'id',
+  workspaceId: 'workspaceId',
+  authType: 'authType',
+  externalUserId: 'externalUserId',
+  displayName: 'displayName',
+  email: 'email',
+  fingerprintHash: 'fingerprintHash',
+  customerTier: 'customerTier',
+  voteWeight: 'voteWeight',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.BoardScalarFieldEnum = {
+  id: 'id',
+  workspaceId: 'workspaceId',
   name: 'name',
   slug: 'slug',
   description: 'description',
-  ownerId: 'ownerId',
+  isPublic: 'isPublic',
+  isModerated: 'isModerated',
+  displayOrder: 'displayOrder',
+  isActive: 'isActive',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  isActive: 'isActive'
+  updatedAt: 'updatedAt'
 };
 
-exports.Prisma.TaskScalarFieldEnum = {
+exports.Prisma.CategoryScalarFieldEnum = {
   id: 'id',
-  projectId: 'projectId',
-  title: 'title',
-  status: 'status',
-  targetFiles: 'targetFiles',
-  checklist: 'checklist',
+  boardId: 'boardId',
+  name: 'name',
+  slug: 'slug',
+  description: 'description',
+  displayOrder: 'displayOrder',
+  isActive: 'isActive',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  isActive: 'isActive'
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.TagScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  slug: 'slug',
+  colorHex: 'colorHex',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PostTagScalarFieldEnum = {
+  postId: 'postId',
+  tagId: 'tagId',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.PostStatusScalarFieldEnum = {
+  id: 'id',
+  workspaceId: 'workspaceId',
+  name: 'name',
+  key: 'key',
+  category: 'category',
+  colorHex: 'colorHex',
+  showOnRoadmap: 'showOnRoadmap',
+  displayOrder: 'displayOrder',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PostScalarFieldEnum = {
+  id: 'id',
+  boardId: 'boardId',
+  categoryId: 'categoryId',
+  statusId: 'statusId',
+  authorUserId: 'authorUserId',
+  voterProfileId: 'voterProfileId',
+  title: 'title',
+  slug: 'slug',
+  content: 'content',
+  totalVotesCount: 'totalVotesCount',
+  totalScoreWeight: 'totalScoreWeight',
+  commentsCount: 'commentsCount',
+  isPinned: 'isPinned',
+  isLocked: 'isLocked',
+  mergedIntoPostId: 'mergedIntoPostId',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PostStatusHistoryScalarFieldEnum = {
+  id: 'id',
+  postId: 'postId',
+  oldStatusId: 'oldStatusId',
+  newStatusId: 'newStatusId',
+  changedById: 'changedById',
+  changeNote: 'changeNote',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.PostMergeHistoryScalarFieldEnum = {
+  id: 'id',
+  sourcePostId: 'sourcePostId',
+  targetPostId: 'targetPostId',
+  performedById: 'performedById',
+  votesTransferred: 'votesTransferred',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.PostAttachmentScalarFieldEnum = {
+  id: 'id',
+  postId: 'postId',
+  fileName: 'fileName',
+  fileUrl: 'fileUrl',
+  fileSize: 'fileSize',
+  mimeType: 'mimeType',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.VoteScalarFieldEnum = {
+  id: 'id',
+  postId: 'postId',
+  voterProfileId: 'voterProfileId',
+  appliedWeight: 'appliedWeight',
+  ipAddressHash: 'ipAddressHash',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.VoteActivityLogScalarFieldEnum = {
+  id: 'id',
+  postId: 'postId',
+  voterProfileId: 'voterProfileId',
+  actionType: 'actionType',
+  ipAddressHash: 'ipAddressHash',
+  userAgent: 'userAgent',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.CommentScalarFieldEnum = {
+  id: 'id',
+  postId: 'postId',
+  authorUserId: 'authorUserId',
+  parentId: 'parentId',
+  authorName: 'authorName',
+  content: 'content',
+  isInternalNote: 'isInternalNote',
+  isPinned: 'isPinned',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CommentReactionScalarFieldEnum = {
+  id: 'id',
+  commentId: 'commentId',
+  userId: 'userId',
+  voterId: 'voterId',
+  type: 'type',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.RoadmapViewScalarFieldEnum = {
+  id: 'id',
+  workspaceId: 'workspaceId',
+  name: 'name',
+  slug: 'slug',
+  isDefault: 'isDefault',
+  columnConfig: 'columnConfig',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ReleaseVersionScalarFieldEnum = {
+  id: 'id',
+  workspaceId: 'workspaceId',
+  versionName: 'versionName',
+  targetDate: 'targetDate',
+  releasedAt: 'releasedAt',
+  isPublished: 'isPublished',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ReleaseItemScalarFieldEnum = {
+  id: 'id',
+  releaseVersionId: 'releaseVersionId',
+  postId: 'postId',
+  completedNote: 'completedNote',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.ChangelogScalarFieldEnum = {
+  id: 'id',
+  workspaceId: 'workspaceId',
+  releaseVersionId: 'releaseVersionId',
+  title: 'title',
+  slug: 'slug',
+  summary: 'summary',
+  bodyMarkdown: 'bodyMarkdown',
+  isPublished: 'isPublished',
+  publishedAt: 'publishedAt',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PostSubscriptionScalarFieldEnum = {
+  id: 'id',
+  postId: 'postId',
+  voterProfileId: 'voterProfileId',
+  notifyEmail: 'notifyEmail',
+  notifyInApp: 'notifyInApp',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.NotificationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  type: 'type',
+  title: 'title',
+  message: 'message',
+  actionUrl: 'actionUrl',
+  isRead: 'isRead',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.WebhookSubscriptionScalarFieldEnum = {
+  id: 'id',
+  workspaceId: 'workspaceId',
+  targetUrl: 'targetUrl',
+  secretKey: 'secretKey',
+  events: 'events',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.AuditLogScalarFieldEnum = {
+  id: 'id',
+  workspaceId: 'workspaceId',
+  userId: 'userId',
+  action: 'action',
+  entityType: 'entityType',
+  entityId: 'entityId',
+  details: 'details',
+  ipAddress: 'ipAddress',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -128,16 +394,100 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
+exports.Prisma.JsonNullValueInput = {
+  JsonNull: Prisma.JsonNull
+};
+
+exports.Prisma.QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
+};
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
+};
+
 exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+exports.WorkspaceRole = exports.$Enums.WorkspaceRole = {
+  OWNER: 'OWNER',
+  ADMIN: 'ADMIN',
+  PRODUCT_MANAGER: 'PRODUCT_MANAGER',
+  DEVELOPER: 'DEVELOPER',
+  MODERATOR: 'MODERATOR'
+};
 
+exports.VoterAuthType = exports.$Enums.VoterAuthType = {
+  REGISTERED: 'REGISTERED',
+  SSO_IDENTIFIED: 'SSO_IDENTIFIED',
+  ANONYMOUS_FINGERPRINT: 'ANONYMOUS_FINGERPRINT'
+};
+
+exports.StatusCategory = exports.$Enums.StatusCategory = {
+  BACKLOG: 'BACKLOG',
+  UNSCHEDULED: 'UNSCHEDULED',
+  PLANNED: 'PLANNED',
+  IN_PROGRESS: 'IN_PROGRESS',
+  COMPLETED: 'COMPLETED',
+  CLOSED: 'CLOSED',
+  DECLINED: 'DECLINED'
+};
+
+exports.ReactionType = exports.$Enums.ReactionType = {
+  THUMBS_UP: 'THUMBS_UP',
+  THUMBS_DOWN: 'THUMBS_DOWN',
+  HEART: 'HEART',
+  ROCKET: 'ROCKET',
+  INSIGHTFUL: 'INSIGHTFUL'
+};
+
+exports.NotificationType = exports.$Enums.NotificationType = {
+  STATUS_CHANGED: 'STATUS_CHANGED',
+  NEW_COMMENT: 'NEW_COMMENT',
+  OFFICIAL_RESPONSE: 'OFFICIAL_RESPONSE',
+  FEATURE_RELEASED: 'FEATURE_RELEASED',
+  MENTIONED: 'MENTIONED'
+};
+
+exports.WebhookEvent = exports.$Enums.WebhookEvent = {
+  POST_CREATED: 'POST_CREATED',
+  POST_STATUS_CHANGED: 'POST_STATUS_CHANGED',
+  POST_MERGED: 'POST_MERGED',
+  COMMENT_ADDED: 'COMMENT_ADDED',
+  RELEASE_PUBLISHED: 'RELEASE_PUBLISHED'
+};
 
 exports.Prisma.ModelName = {
+  Workspace: 'Workspace',
   User: 'User',
-  Project: 'Project',
-  Task: 'Task'
+  WorkspaceMember: 'WorkspaceMember',
+  UserSession: 'UserSession',
+  VoterProfile: 'VoterProfile',
+  Board: 'Board',
+  Category: 'Category',
+  Tag: 'Tag',
+  PostTag: 'PostTag',
+  PostStatus: 'PostStatus',
+  Post: 'Post',
+  PostStatusHistory: 'PostStatusHistory',
+  PostMergeHistory: 'PostMergeHistory',
+  PostAttachment: 'PostAttachment',
+  Vote: 'Vote',
+  VoteActivityLog: 'VoteActivityLog',
+  Comment: 'Comment',
+  CommentReaction: 'CommentReaction',
+  RoadmapView: 'RoadmapView',
+  ReleaseVersion: 'ReleaseVersion',
+  ReleaseItem: 'ReleaseItem',
+  Changelog: 'Changelog',
+  PostSubscription: 'PostSubscription',
+  Notification: 'Notification',
+  WebhookSubscription: 'WebhookSubscription',
+  AuditLog: 'AuditLog'
 };
 /**
  * Create the Client
@@ -150,7 +500,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\University\\Study\\Programming\\auto-flow\\mock-projects\\proj-1\\src\\generated\\prisma",
+      "value": "/home/ubuntu/projects/test-with-ec2/src/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -159,16 +509,16 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "windows",
+        "value": "debian-openssl-3.0.x",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\University\\Study\\Programming\\auto-flow\\mock-projects\\proj-1\\prisma\\schema.prisma",
+    "sourceFilePath": "/home/ubuntu/projects/test-with-ec2/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": "../../../.env",
+    "rootEnvPath": null,
     "schemaEnvPath": "../../../.env"
   },
   "relativePath": "../../../prisma",
@@ -177,8 +527,7 @@ const config = {
   "datasourceNames": [
     "db"
   ],
-  "activeProvider": "sqlite",
-  "postinstall": false,
+  "activeProvider": "postgresql",
   "inlineDatasources": {
     "db": {
       "url": {
@@ -187,13 +536,13 @@ const config = {
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"sqlite\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id        String   @id @default(uuid())\n  email     String   @unique\n  name      String\n  role      String   @default(\"operator\")\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @updatedAt @map(\"updated_at\")\n  isActive  Boolean  @default(true) @map(\"is_active\")\n\n  projects Project[]\n\n  @@map(\"users\")\n}\n\nmodel Project {\n  id          String   @id @default(uuid())\n  name        String\n  slug        String   @unique\n  description String?\n  ownerId     String   @map(\"owner_id\")\n  createdAt   DateTime @default(now()) @map(\"created_at\")\n  updatedAt   DateTime @updatedAt @map(\"updated_at\")\n  isActive    Boolean  @default(true) @map(\"is_active\")\n\n  owner User   @relation(fields: [ownerId], references: [id], onDelete: Cascade)\n  tasks Task[]\n\n  @@map(\"projects\")\n}\n\nmodel Task {\n  id          String   @id @default(uuid())\n  projectId   String   @map(\"project_id\")\n  title       String\n  status      String   @default(\"pending\")\n  targetFiles String   @default(\"[]\") @map(\"target_files\")\n  checklist   String   @default(\"[]\")\n  createdAt   DateTime @default(now()) @map(\"created_at\")\n  updatedAt   DateTime @updatedAt @map(\"updated_at\")\n  isActive    Boolean  @default(true) @map(\"is_active\")\n\n  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)\n\n  @@map(\"tasks\")\n}\n",
-  "inlineSchemaHash": "40ab72fc714b06d821b677022f2f7bbf9bac79c86af94a779c12534ae2d1fd69",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider  = \"postgresql\"\n  url       = env(\"DATABASE_URL\")\n  directUrl = env(\"DIRECT_URL\")\n}\n\nenum WorkspaceRole {\n  OWNER\n  ADMIN\n  PRODUCT_MANAGER\n  DEVELOPER\n  MODERATOR\n}\n\nenum VoterAuthType {\n  REGISTERED\n  SSO_IDENTIFIED\n  ANONYMOUS_FINGERPRINT\n}\n\nenum StatusCategory {\n  BACKLOG\n  UNSCHEDULED\n  PLANNED\n  IN_PROGRESS\n  COMPLETED\n  CLOSED\n  DECLINED\n}\n\nenum ReactionType {\n  THUMBS_UP\n  THUMBS_DOWN\n  HEART\n  ROCKET\n  INSIGHTFUL\n}\n\nenum NotificationType {\n  STATUS_CHANGED\n  NEW_COMMENT\n  OFFICIAL_RESPONSE\n  FEATURE_RELEASED\n  MENTIONED\n}\n\nenum WebhookEvent {\n  POST_CREATED\n  POST_STATUS_CHANGED\n  POST_MERGED\n  COMMENT_ADDED\n  RELEASE_PUBLISHED\n}\n\n// -------------------------------------------------------------\n// NHOM 1: KHONG GIAN LAM VIEC VA DINH DANH (MODELS 1 - 5)\n// -------------------------------------------------------------\n\nmodel Workspace {\n  id              String                @id @default(uuid())\n  name            String\n  slug            String                @unique\n  customDomain    String?               @unique @map(\"custom_domain\")\n  brandingConfig  Json                  @default(\"{}\") @map(\"branding_config\")\n  isPublicPortal  Boolean               @default(true) @map(\"is_public_portal\")\n  members         WorkspaceMember[]\n  boards          Board[]\n  statuses        PostStatus[]\n  roadmapViews    RoadmapView[]\n  releaseVersions ReleaseVersion[]\n  changelogs      Changelog[]\n  webhooks        WebhookSubscription[]\n  auditLogs       AuditLog[]\n  voterProfiles   VoterProfile[]\n\n  isActive  Boolean  @default(true) @map(\"is_active\")\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n  @@map(\"workspaces\")\n}\n\nmodel User {\n  id            String              @id @default(uuid())\n  email         String              @unique\n  fullName      String              @map(\"full_name\")\n  avatarUrl     String?             @map(\"avatar_url\")\n  passwordHash  String?             @map(\"password_hash\")\n  memberships   WorkspaceMember[]\n  sessions      UserSession[]\n  authoredPosts Post[]              @relation(\"UserAuthoredPosts\")\n  comments      Comment[]\n  statusUpdates PostStatusHistory[] @relation(\"StatusUpdatedByUser\")\n  auditLogs     AuditLog[]\n  notifications Notification[]\n\n  isActive  Boolean  @default(true) @map(\"is_active\")\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n  @@map(\"users\")\n}\n\nmodel WorkspaceMember {\n  id          Int           @id @default(autoincrement())\n  workspaceId String        @map(\"workspace_id\")\n  userId      String        @map(\"user_id\")\n  role        WorkspaceRole @default(DEVELOPER)\n\n  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)\n  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  isActive  Boolean  @default(true) @map(\"is_active\")\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n  @@unique([workspaceId, userId])\n  @@map(\"workspace_members\")\n}\n\nmodel UserSession {\n  id        String   @id @default(uuid())\n  userId    String   @map(\"user_id\")\n  tokenHash String   @unique @map(\"token_hash\")\n  ipAddress String?  @map(\"ip_address\")\n  userAgent String?  @map(\"user_agent\")\n  expiresAt DateTime @map(\"expires_at\")\n\n  user User @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  createdAt DateTime @default(now()) @map(\"created_at\")\n\n  @@map(\"user_sessions\")\n}\n\nmodel VoterProfile {\n  id              String        @id @default(uuid())\n  workspaceId     String        @map(\"workspace_id\")\n  authType        VoterAuthType @default(REGISTERED) @map(\"auth_type\")\n  externalUserId  String?       @map(\"external_user_id\")\n  displayName     String        @map(\"display_name\")\n  email           String?\n  fingerprintHash String?       @map(\"fingerprint_hash\")\n  customerTier    String        @default(\"standard\") @map(\"customer_tier\")\n  voteWeight      Decimal       @default(1.00) @map(\"vote_weight\") @db.Decimal(5, 2)\n\n  workspace     Workspace          @relation(fields: [workspaceId], references: [id], onDelete: Cascade)\n  votes         Vote[]\n  voteLogs      VoteActivityLog[]\n  subscriptions PostSubscription[]\n\n  isActive  Boolean  @default(true) @map(\"is_active\")\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n  @@unique([workspaceId, externalUserId])\n  @@index([workspaceId, fingerprintHash])\n  @@map(\"voter_profiles\")\n}\n\n// -------------------------------------------------------------\n// NHOM 2: CAU TRUC BANG PHAN HOI VA PHAN LOAI (MODELS 6 - 9)\n// -------------------------------------------------------------\n\nmodel Board {\n  id           String  @id @default(uuid())\n  workspaceId  String  @map(\"workspace_id\")\n  name         String\n  slug         String\n  description  String? @db.Text\n  isPublic     Boolean @default(true) @map(\"is_public\")\n  isModerated  Boolean @default(false) @map(\"is_moderated\")\n  displayOrder Int     @default(0) @map(\"display_order\")\n\n  workspace  Workspace  @relation(fields: [workspaceId], references: [id], onDelete: Cascade)\n  categories Category[]\n  posts      Post[]\n\n  isActive  Boolean  @default(true) @map(\"is_active\")\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n  @@unique([workspaceId, slug])\n  @@map(\"boards\")\n}\n\nmodel Category {\n  id           Int     @id @default(autoincrement())\n  boardId      String  @map(\"board_id\")\n  name         String\n  slug         String\n  description  String?\n  displayOrder Int     @default(0) @map(\"display_order\")\n\n  board Board  @relation(fields: [boardId], references: [id], onDelete: Cascade)\n  posts Post[]\n\n  isActive  Boolean  @default(true) @map(\"is_active\")\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n  @@unique([boardId, slug])\n  @@map(\"categories\")\n}\n\nmodel Tag {\n  id       Int       @id @default(autoincrement())\n  name     String\n  slug     String    @unique\n  colorHex String    @default(\"#6B7280\") @map(\"color_hex\")\n  posts    PostTag[]\n\n  isActive  Boolean  @default(true) @map(\"is_active\")\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n  @@map(\"tags\")\n}\n\nmodel PostTag {\n  postId String @map(\"post_id\")\n  tagId  Int    @map(\"tag_id\")\n\n  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)\n  tag  Tag  @relation(fields: [tagId], references: [id], onDelete: Cascade)\n\n  createdAt DateTime @default(now()) @map(\"created_at\")\n\n  @@id([postId, tagId])\n  @@map(\"post_tags\")\n}\n\n// -------------------------------------------------------------\n// NHOM 3: VONG DOI YEU CAU TINH NANG (MODELS 10 - 14)\n// -------------------------------------------------------------\n\nmodel PostStatus {\n  id            Int            @id @default(autoincrement())\n  workspaceId   String         @map(\"workspace_id\")\n  name          String\n  key           String\n  category      StatusCategory @default(BACKLOG)\n  colorHex      String         @default(\"#3B82F6\") @map(\"color_hex\")\n  showOnRoadmap Boolean        @default(false) @map(\"show_on_roadmap\")\n  displayOrder  Int            @default(0) @map(\"display_order\")\n\n  workspace     Workspace           @relation(fields: [workspaceId], references: [id], onDelete: Cascade)\n  posts         Post[]\n  sourceHistory PostStatusHistory[] @relation(\"OldStatusRelation\")\n  targetHistory PostStatusHistory[] @relation(\"NewStatusRelation\")\n\n  isActive  Boolean  @default(true) @map(\"is_active\")\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n  @@unique([workspaceId, key])\n  @@map(\"post_statuses\")\n}\n\nmodel Post {\n  id               String  @id @default(uuid())\n  boardId          String  @map(\"board_id\")\n  categoryId       Int?    @map(\"category_id\")\n  statusId         Int     @map(\"status_id\")\n  authorUserId     String? @map(\"author_user_id\")\n  voterProfileId   String? @map(\"voter_profile_id\")\n  title            String\n  slug             String\n  content          String  @db.Text\n  totalVotesCount  Int     @default(0) @map(\"total_votes_count\")\n  totalScoreWeight Decimal @default(0.00) @map(\"total_score_weight\") @db.Decimal(10, 2)\n  commentsCount    Int     @default(0) @map(\"comments_count\")\n  isPinned         Boolean @default(false) @map(\"is_pinned\")\n  isLocked         Boolean @default(false) @map(\"is_locked\")\n  mergedIntoPostId String? @map(\"merged_into_post_id\")\n\n  board         Board      @relation(fields: [boardId], references: [id], onDelete: Cascade)\n  category      Category?  @relation(fields: [categoryId], references: [id], onDelete: SetNull)\n  status        PostStatus @relation(fields: [statusId], references: [id], onDelete: Restrict)\n  authorUser    User?      @relation(\"UserAuthoredPosts\", fields: [authorUserId], references: [id], onDelete: SetNull)\n  mergedTarget  Post?      @relation(\"MergedPosts\", fields: [mergedIntoPostId], references: [id], onDelete: SetNull)\n  mergedSources Post[]     @relation(\"MergedPosts\")\n\n  tags               PostTag[]\n  attachments        PostAttachment[]\n  votes              Vote[]\n  comments           Comment[]\n  statusHistories    PostStatusHistory[]\n  mergeHistoriesTo   PostMergeHistory[]  @relation(\"TargetPostMerges\")\n  mergeHistoriesFrom PostMergeHistory[]  @relation(\"SourcePostMerges\")\n  subscriptions      PostSubscription[]\n  releaseItems       ReleaseItem[]\n\n  isActive  Boolean  @default(true) @map(\"is_active\")\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n  @@unique([boardId, slug])\n  @@index([boardId, statusId])\n  @@index([totalScoreWeight(sort: Desc)])\n  @@map(\"posts\")\n}\n\nmodel PostStatusHistory {\n  id          Int     @id @default(autoincrement())\n  postId      String  @map(\"post_id\")\n  oldStatusId Int?    @map(\"old_status_id\")\n  newStatusId Int     @map(\"new_status_id\")\n  changedById String? @map(\"changed_by_id\")\n  changeNote  String? @map(\"change_note\") @db.Text\n\n  post      Post        @relation(fields: [postId], references: [id], onDelete: Cascade)\n  oldStatus PostStatus? @relation(\"OldStatusRelation\", fields: [oldStatusId], references: [id], onDelete: SetNull)\n  newStatus PostStatus  @relation(\"NewStatusRelation\", fields: [newStatusId], references: [id], onDelete: Restrict)\n  changedBy User?       @relation(\"StatusUpdatedByUser\", fields: [changedById], references: [id], onDelete: SetNull)\n\n  createdAt DateTime @default(now()) @map(\"created_at\")\n\n  @@map(\"post_status_histories\")\n}\n\nmodel PostMergeHistory {\n  id               Int     @id @default(autoincrement())\n  sourcePostId     String  @map(\"source_post_id\")\n  targetPostId     String  @map(\"target_post_id\")\n  performedById    String? @map(\"performed_by_id\")\n  votesTransferred Int     @default(0) @map(\"votes_transferred\")\n\n  sourcePost Post @relation(\"SourcePostMerges\", fields: [sourcePostId], references: [id], onDelete: Cascade)\n  targetPost Post @relation(\"TargetPostMerges\", fields: [targetPostId], references: [id], onDelete: Cascade)\n\n  createdAt DateTime @default(now()) @map(\"created_at\")\n\n  @@map(\"post_merge_histories\")\n}\n\nmodel PostAttachment {\n  id       String @id @default(uuid())\n  postId   String @map(\"post_id\")\n  fileName String @map(\"file_name\")\n  fileUrl  String @map(\"file_url\")\n  fileSize Int    @map(\"file_size\")\n  mimeType String @map(\"mime_type\")\n\n  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)\n\n  createdAt DateTime @default(now()) @map(\"created_at\")\n\n  @@map(\"post_attachments\")\n}\n\n// -------------------------------------------------------------\n// NHOM 4: BINH CHON VA THAO LUAN CONG DONG (MODELS 15 - 18)\n// -------------------------------------------------------------\n\nmodel Vote {\n  id             Int     @id @default(autoincrement())\n  postId         String  @map(\"post_id\")\n  voterProfileId String  @map(\"voter_profile_id\")\n  appliedWeight  Decimal @default(1.00) @map(\"applied_weight\") @db.Decimal(5, 2)\n  ipAddressHash  String? @map(\"ip_address_hash\")\n\n  post         Post         @relation(fields: [postId], references: [id], onDelete: Cascade)\n  voterProfile VoterProfile @relation(fields: [voterProfileId], references: [id], onDelete: Cascade)\n\n  createdAt DateTime @default(now()) @map(\"created_at\")\n\n  @@unique([postId, voterProfileId])\n  @@map(\"votes\")\n}\n\nmodel VoteActivityLog {\n  id             Int     @id @default(autoincrement())\n  postId         String  @map(\"post_id\")\n  voterProfileId String  @map(\"voter_profile_id\")\n  actionType     String  @map(\"action_type\")\n  ipAddressHash  String? @map(\"ip_address_hash\")\n  userAgent      String? @map(\"user_agent\")\n\n  voterProfile VoterProfile @relation(fields: [voterProfileId], references: [id], onDelete: Cascade)\n\n  createdAt DateTime @default(now()) @map(\"created_at\")\n\n  @@map(\"vote_activity_logs\")\n}\n\nmodel Comment {\n  id             String  @id @default(uuid())\n  postId         String  @map(\"post_id\")\n  authorUserId   String? @map(\"author_user_id\")\n  parentId       String? @map(\"parent_id\")\n  authorName     String  @map(\"author_name\")\n  content        String  @db.Text\n  isInternalNote Boolean @default(false) @map(\"is_internal_note\")\n  isPinned       Boolean @default(false) @map(\"is_pinned\")\n\n  post          Post              @relation(fields: [postId], references: [id], onDelete: Cascade)\n  authorUser    User?             @relation(fields: [authorUserId], references: [id], onDelete: SetNull)\n  parentComment Comment?          @relation(\"NestedReplies\", fields: [parentId], references: [id], onDelete: Cascade)\n  replies       Comment[]         @relation(\"NestedReplies\")\n  reactions     CommentReaction[]\n\n  isActive  Boolean  @default(true) @map(\"is_active\")\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n  @@map(\"comments\")\n}\n\nmodel CommentReaction {\n  id        Int          @id @default(autoincrement())\n  commentId String       @map(\"comment_id\")\n  userId    String?      @map(\"user_id\")\n  voterId   String?      @map(\"voter_id\")\n  type      ReactionType\n\n  comment Comment @relation(fields: [commentId], references: [id], onDelete: Cascade)\n\n  createdAt DateTime @default(now()) @map(\"created_at\")\n\n  @@unique([commentId, userId, type])\n  @@map(\"comment_reactions\")\n}\n\n// -------------------------------------------------------------\n// NHOM 5: LO TRINH, PHIEN BAN VA CHANGELOG (MODELS 19 - 22)\n// -------------------------------------------------------------\n\nmodel RoadmapView {\n  id           Int     @id @default(autoincrement())\n  workspaceId  String  @map(\"workspace_id\")\n  name         String\n  slug         String\n  isDefault    Boolean @default(false) @map(\"is_default\")\n  columnConfig Json    @default(\"[]\") @map(\"column_config\")\n\n  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)\n\n  isActive  Boolean  @default(true) @map(\"is_active\")\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n  @@unique([workspaceId, slug])\n  @@map(\"roadmap_views\")\n}\n\nmodel ReleaseVersion {\n  id          String    @id @default(uuid())\n  workspaceId String    @map(\"workspace_id\")\n  versionName String    @map(\"version_name\")\n  targetDate  DateTime? @map(\"target_date\")\n  releasedAt  DateTime? @map(\"released_at\")\n  isPublished Boolean   @default(false) @map(\"is_published\")\n\n  workspace Workspace     @relation(fields: [workspaceId], references: [id], onDelete: Cascade)\n  items     ReleaseItem[]\n  changelog Changelog?\n\n  isActive  Boolean  @default(true) @map(\"is_active\")\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n  @@unique([workspaceId, versionName])\n  @@map(\"release_versions\")\n}\n\nmodel ReleaseItem {\n  id               Int     @id @default(autoincrement())\n  releaseVersionId String  @map(\"release_version_id\")\n  postId           String  @map(\"post_id\")\n  completedNote    String? @map(\"completed_note\")\n\n  releaseVersion ReleaseVersion @relation(fields: [releaseVersionId], references: [id], onDelete: Cascade)\n  post           Post           @relation(fields: [postId], references: [id], onDelete: Cascade)\n\n  createdAt DateTime @default(now()) @map(\"created_at\")\n\n  @@unique([releaseVersionId, postId])\n  @@map(\"release_items\")\n}\n\nmodel Changelog {\n  id               String    @id @default(uuid())\n  workspaceId      String    @map(\"workspace_id\")\n  releaseVersionId String?   @unique @map(\"release_version_id\")\n  title            String\n  slug             String\n  summary          String    @db.Text\n  bodyMarkdown     String    @map(\"body_markdown\") @db.Text\n  isPublished      Boolean   @default(false) @map(\"is_published\")\n  publishedAt      DateTime? @map(\"published_at\")\n\n  workspace      Workspace       @relation(fields: [workspaceId], references: [id], onDelete: Cascade)\n  releaseVersion ReleaseVersion? @relation(fields: [releaseVersionId], references: [id], onDelete: SetNull)\n\n  isActive  Boolean  @default(true) @map(\"is_active\")\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n  @@unique([workspaceId, slug])\n  @@map(\"changelogs\")\n}\n\n// -------------------------------------------------------------\n// NHOM 6: THONG BAO, WEBHOOK VA KIEM TOAN (MODELS 23 - 26)\n// -------------------------------------------------------------\n\nmodel PostSubscription {\n  id             Int     @id @default(autoincrement())\n  postId         String  @map(\"post_id\")\n  voterProfileId String  @map(\"voter_profile_id\")\n  notifyEmail    Boolean @default(true) @map(\"notify_email\")\n  notifyInApp    Boolean @default(true) @map(\"notify_in_app\")\n\n  post         Post         @relation(fields: [postId], references: [id], onDelete: Cascade)\n  voterProfile VoterProfile @relation(fields: [voterProfileId], references: [id], onDelete: Cascade)\n\n  createdAt DateTime @default(now()) @map(\"created_at\")\n\n  @@unique([postId, voterProfileId])\n  @@map(\"post_subscriptions\")\n}\n\nmodel Notification {\n  id        String           @id @default(uuid())\n  userId    String           @map(\"user_id\")\n  type      NotificationType\n  title     String\n  message   String           @db.Text\n  actionUrl String?          @map(\"action_url\")\n  isRead    Boolean          @default(false) @map(\"is_read\")\n\n  user User @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  createdAt DateTime @default(now()) @map(\"created_at\")\n\n  @@index([userId, isRead])\n  @@map(\"notifications\")\n}\n\nmodel WebhookSubscription {\n  id          String         @id @default(uuid())\n  workspaceId String         @map(\"workspace_id\")\n  targetUrl   String         @map(\"target_url\")\n  secretKey   String         @map(\"secret_key\")\n  events      WebhookEvent[]\n\n  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)\n\n  isActive  Boolean  @default(true) @map(\"is_active\")\n  createdAt DateTime @default(now()) @map(\"created_at\")\n  updatedAt DateTime @updatedAt @map(\"updated_at\")\n\n  @@map(\"webhook_subscriptions\")\n}\n\nmodel AuditLog {\n  id          Int     @id @default(autoincrement())\n  workspaceId String  @map(\"workspace_id\")\n  userId      String? @map(\"user_id\")\n  action      String\n  entityType  String  @map(\"entity_type\")\n  entityId    String  @map(\"entity_id\")\n  details     Json    @default(\"{}\")\n  ipAddress   String? @map(\"ip_address\")\n\n  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)\n  user      User?     @relation(fields: [userId], references: [id], onDelete: SetNull)\n\n  createdAt DateTime @default(now()) @map(\"created_at\")\n\n  @@index([workspaceId, entityType, entityId])\n  @@map(\"audit_logs\")\n}\n",
+  "inlineSchemaHash": "b9c8627efbe6c0bc85aa713248fe5619cddcf8316c953bdf0c6030bdcdbad56d",
   "copyEngine": true
 }
 config.dirname = '/'
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"role\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"updated_at\"},{\"name\":\"isActive\",\"kind\":\"scalar\",\"type\":\"Boolean\",\"dbName\":\"is_active\"},{\"name\":\"projects\",\"kind\":\"object\",\"type\":\"Project\",\"relationName\":\"ProjectToUser\"}],\"dbName\":\"users\"},\"Project\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"slug\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"ownerId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"owner_id\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"updated_at\"},{\"name\":\"isActive\",\"kind\":\"scalar\",\"type\":\"Boolean\",\"dbName\":\"is_active\"},{\"name\":\"owner\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"ProjectToUser\"},{\"name\":\"tasks\",\"kind\":\"object\",\"type\":\"Task\",\"relationName\":\"ProjectToTask\"}],\"dbName\":\"projects\"},\"Task\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"projectId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"project_id\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"status\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"targetFiles\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"target_files\"},{\"name\":\"checklist\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"updated_at\"},{\"name\":\"isActive\",\"kind\":\"scalar\",\"type\":\"Boolean\",\"dbName\":\"is_active\"},{\"name\":\"project\",\"kind\":\"object\",\"type\":\"Project\",\"relationName\":\"ProjectToTask\"}],\"dbName\":\"tasks\"}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"Workspace\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"slug\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"customDomain\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"custom_domain\"},{\"name\":\"brandingConfig\",\"kind\":\"scalar\",\"type\":\"Json\",\"dbName\":\"branding_config\"},{\"name\":\"isPublicPortal\",\"kind\":\"scalar\",\"type\":\"Boolean\",\"dbName\":\"is_public_portal\"},{\"name\":\"members\",\"kind\":\"object\",\"type\":\"WorkspaceMember\",\"relationName\":\"WorkspaceToWorkspaceMember\"},{\"name\":\"boards\",\"kind\":\"object\",\"type\":\"Board\",\"relationName\":\"BoardToWorkspace\"},{\"name\":\"statuses\",\"kind\":\"object\",\"type\":\"PostStatus\",\"relationName\":\"PostStatusToWorkspace\"},{\"name\":\"roadmapViews\",\"kind\":\"object\",\"type\":\"RoadmapView\",\"relationName\":\"RoadmapViewToWorkspace\"},{\"name\":\"releaseVersions\",\"kind\":\"object\",\"type\":\"ReleaseVersion\",\"relationName\":\"ReleaseVersionToWorkspace\"},{\"name\":\"changelogs\",\"kind\":\"object\",\"type\":\"Changelog\",\"relationName\":\"ChangelogToWorkspace\"},{\"name\":\"webhooks\",\"kind\":\"object\",\"type\":\"WebhookSubscription\",\"relationName\":\"WebhookSubscriptionToWorkspace\"},{\"name\":\"auditLogs\",\"kind\":\"object\",\"type\":\"AuditLog\",\"relationName\":\"AuditLogToWorkspace\"},{\"name\":\"voterProfiles\",\"kind\":\"object\",\"type\":\"VoterProfile\",\"relationName\":\"VoterProfileToWorkspace\"},{\"name\":\"isActive\",\"kind\":\"scalar\",\"type\":\"Boolean\",\"dbName\":\"is_active\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"updated_at\"}],\"dbName\":\"workspaces\"},\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"fullName\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"full_name\"},{\"name\":\"avatarUrl\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"avatar_url\"},{\"name\":\"passwordHash\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"password_hash\"},{\"name\":\"memberships\",\"kind\":\"object\",\"type\":\"WorkspaceMember\",\"relationName\":\"UserToWorkspaceMember\"},{\"name\":\"sessions\",\"kind\":\"object\",\"type\":\"UserSession\",\"relationName\":\"UserToUserSession\"},{\"name\":\"authoredPosts\",\"kind\":\"object\",\"type\":\"Post\",\"relationName\":\"UserAuthoredPosts\"},{\"name\":\"comments\",\"kind\":\"object\",\"type\":\"Comment\",\"relationName\":\"CommentToUser\"},{\"name\":\"statusUpdates\",\"kind\":\"object\",\"type\":\"PostStatusHistory\",\"relationName\":\"StatusUpdatedByUser\"},{\"name\":\"auditLogs\",\"kind\":\"object\",\"type\":\"AuditLog\",\"relationName\":\"AuditLogToUser\"},{\"name\":\"notifications\",\"kind\":\"object\",\"type\":\"Notification\",\"relationName\":\"NotificationToUser\"},{\"name\":\"isActive\",\"kind\":\"scalar\",\"type\":\"Boolean\",\"dbName\":\"is_active\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"updated_at\"}],\"dbName\":\"users\"},\"WorkspaceMember\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"workspaceId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"workspace_id\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"user_id\"},{\"name\":\"role\",\"kind\":\"enum\",\"type\":\"WorkspaceRole\"},{\"name\":\"workspace\",\"kind\":\"object\",\"type\":\"Workspace\",\"relationName\":\"WorkspaceToWorkspaceMember\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"UserToWorkspaceMember\"},{\"name\":\"isActive\",\"kind\":\"scalar\",\"type\":\"Boolean\",\"dbName\":\"is_active\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"updated_at\"}],\"dbName\":\"workspace_members\"},\"UserSession\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"user_id\"},{\"name\":\"tokenHash\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"token_hash\"},{\"name\":\"ipAddress\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"ip_address\"},{\"name\":\"userAgent\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"user_agent\"},{\"name\":\"expiresAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"expires_at\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"UserToUserSession\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"}],\"dbName\":\"user_sessions\"},\"VoterProfile\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"workspaceId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"workspace_id\"},{\"name\":\"authType\",\"kind\":\"enum\",\"type\":\"VoterAuthType\",\"dbName\":\"auth_type\"},{\"name\":\"externalUserId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"external_user_id\"},{\"name\":\"displayName\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"display_name\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"fingerprintHash\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"fingerprint_hash\"},{\"name\":\"customerTier\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"customer_tier\"},{\"name\":\"voteWeight\",\"kind\":\"scalar\",\"type\":\"Decimal\",\"dbName\":\"vote_weight\"},{\"name\":\"workspace\",\"kind\":\"object\",\"type\":\"Workspace\",\"relationName\":\"VoterProfileToWorkspace\"},{\"name\":\"votes\",\"kind\":\"object\",\"type\":\"Vote\",\"relationName\":\"VoteToVoterProfile\"},{\"name\":\"voteLogs\",\"kind\":\"object\",\"type\":\"VoteActivityLog\",\"relationName\":\"VoteActivityLogToVoterProfile\"},{\"name\":\"subscriptions\",\"kind\":\"object\",\"type\":\"PostSubscription\",\"relationName\":\"PostSubscriptionToVoterProfile\"},{\"name\":\"isActive\",\"kind\":\"scalar\",\"type\":\"Boolean\",\"dbName\":\"is_active\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"updated_at\"}],\"dbName\":\"voter_profiles\"},\"Board\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"workspaceId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"workspace_id\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"slug\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"isPublic\",\"kind\":\"scalar\",\"type\":\"Boolean\",\"dbName\":\"is_public\"},{\"name\":\"isModerated\",\"kind\":\"scalar\",\"type\":\"Boolean\",\"dbName\":\"is_moderated\"},{\"name\":\"displayOrder\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"display_order\"},{\"name\":\"workspace\",\"kind\":\"object\",\"type\":\"Workspace\",\"relationName\":\"BoardToWorkspace\"},{\"name\":\"categories\",\"kind\":\"object\",\"type\":\"Category\",\"relationName\":\"BoardToCategory\"},{\"name\":\"posts\",\"kind\":\"object\",\"type\":\"Post\",\"relationName\":\"BoardToPost\"},{\"name\":\"isActive\",\"kind\":\"scalar\",\"type\":\"Boolean\",\"dbName\":\"is_active\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"updated_at\"}],\"dbName\":\"boards\"},\"Category\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"boardId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"board_id\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"slug\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"displayOrder\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"display_order\"},{\"name\":\"board\",\"kind\":\"object\",\"type\":\"Board\",\"relationName\":\"BoardToCategory\"},{\"name\":\"posts\",\"kind\":\"object\",\"type\":\"Post\",\"relationName\":\"CategoryToPost\"},{\"name\":\"isActive\",\"kind\":\"scalar\",\"type\":\"Boolean\",\"dbName\":\"is_active\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"updated_at\"}],\"dbName\":\"categories\"},\"Tag\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"slug\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"colorHex\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"color_hex\"},{\"name\":\"posts\",\"kind\":\"object\",\"type\":\"PostTag\",\"relationName\":\"PostTagToTag\"},{\"name\":\"isActive\",\"kind\":\"scalar\",\"type\":\"Boolean\",\"dbName\":\"is_active\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"updated_at\"}],\"dbName\":\"tags\"},\"PostTag\":{\"fields\":[{\"name\":\"postId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"post_id\"},{\"name\":\"tagId\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"tag_id\"},{\"name\":\"post\",\"kind\":\"object\",\"type\":\"Post\",\"relationName\":\"PostToPostTag\"},{\"name\":\"tag\",\"kind\":\"object\",\"type\":\"Tag\",\"relationName\":\"PostTagToTag\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"}],\"dbName\":\"post_tags\"},\"PostStatus\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"workspaceId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"workspace_id\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"key\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"category\",\"kind\":\"enum\",\"type\":\"StatusCategory\"},{\"name\":\"colorHex\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"color_hex\"},{\"name\":\"showOnRoadmap\",\"kind\":\"scalar\",\"type\":\"Boolean\",\"dbName\":\"show_on_roadmap\"},{\"name\":\"displayOrder\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"display_order\"},{\"name\":\"workspace\",\"kind\":\"object\",\"type\":\"Workspace\",\"relationName\":\"PostStatusToWorkspace\"},{\"name\":\"posts\",\"kind\":\"object\",\"type\":\"Post\",\"relationName\":\"PostToPostStatus\"},{\"name\":\"sourceHistory\",\"kind\":\"object\",\"type\":\"PostStatusHistory\",\"relationName\":\"OldStatusRelation\"},{\"name\":\"targetHistory\",\"kind\":\"object\",\"type\":\"PostStatusHistory\",\"relationName\":\"NewStatusRelation\"},{\"name\":\"isActive\",\"kind\":\"scalar\",\"type\":\"Boolean\",\"dbName\":\"is_active\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"updated_at\"}],\"dbName\":\"post_statuses\"},\"Post\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"boardId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"board_id\"},{\"name\":\"categoryId\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"category_id\"},{\"name\":\"statusId\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"status_id\"},{\"name\":\"authorUserId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"author_user_id\"},{\"name\":\"voterProfileId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"voter_profile_id\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"slug\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"content\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"totalVotesCount\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"total_votes_count\"},{\"name\":\"totalScoreWeight\",\"kind\":\"scalar\",\"type\":\"Decimal\",\"dbName\":\"total_score_weight\"},{\"name\":\"commentsCount\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"comments_count\"},{\"name\":\"isPinned\",\"kind\":\"scalar\",\"type\":\"Boolean\",\"dbName\":\"is_pinned\"},{\"name\":\"isLocked\",\"kind\":\"scalar\",\"type\":\"Boolean\",\"dbName\":\"is_locked\"},{\"name\":\"mergedIntoPostId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"merged_into_post_id\"},{\"name\":\"board\",\"kind\":\"object\",\"type\":\"Board\",\"relationName\":\"BoardToPost\"},{\"name\":\"category\",\"kind\":\"object\",\"type\":\"Category\",\"relationName\":\"CategoryToPost\"},{\"name\":\"status\",\"kind\":\"object\",\"type\":\"PostStatus\",\"relationName\":\"PostToPostStatus\"},{\"name\":\"authorUser\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"UserAuthoredPosts\"},{\"name\":\"mergedTarget\",\"kind\":\"object\",\"type\":\"Post\",\"relationName\":\"MergedPosts\"},{\"name\":\"mergedSources\",\"kind\":\"object\",\"type\":\"Post\",\"relationName\":\"MergedPosts\"},{\"name\":\"tags\",\"kind\":\"object\",\"type\":\"PostTag\",\"relationName\":\"PostToPostTag\"},{\"name\":\"attachments\",\"kind\":\"object\",\"type\":\"PostAttachment\",\"relationName\":\"PostToPostAttachment\"},{\"name\":\"votes\",\"kind\":\"object\",\"type\":\"Vote\",\"relationName\":\"PostToVote\"},{\"name\":\"comments\",\"kind\":\"object\",\"type\":\"Comment\",\"relationName\":\"CommentToPost\"},{\"name\":\"statusHistories\",\"kind\":\"object\",\"type\":\"PostStatusHistory\",\"relationName\":\"PostToPostStatusHistory\"},{\"name\":\"mergeHistoriesTo\",\"kind\":\"object\",\"type\":\"PostMergeHistory\",\"relationName\":\"TargetPostMerges\"},{\"name\":\"mergeHistoriesFrom\",\"kind\":\"object\",\"type\":\"PostMergeHistory\",\"relationName\":\"SourcePostMerges\"},{\"name\":\"subscriptions\",\"kind\":\"object\",\"type\":\"PostSubscription\",\"relationName\":\"PostToPostSubscription\"},{\"name\":\"releaseItems\",\"kind\":\"object\",\"type\":\"ReleaseItem\",\"relationName\":\"PostToReleaseItem\"},{\"name\":\"isActive\",\"kind\":\"scalar\",\"type\":\"Boolean\",\"dbName\":\"is_active\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"updated_at\"}],\"dbName\":\"posts\"},\"PostStatusHistory\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"postId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"post_id\"},{\"name\":\"oldStatusId\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"old_status_id\"},{\"name\":\"newStatusId\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"new_status_id\"},{\"name\":\"changedById\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"changed_by_id\"},{\"name\":\"changeNote\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"change_note\"},{\"name\":\"post\",\"kind\":\"object\",\"type\":\"Post\",\"relationName\":\"PostToPostStatusHistory\"},{\"name\":\"oldStatus\",\"kind\":\"object\",\"type\":\"PostStatus\",\"relationName\":\"OldStatusRelation\"},{\"name\":\"newStatus\",\"kind\":\"object\",\"type\":\"PostStatus\",\"relationName\":\"NewStatusRelation\"},{\"name\":\"changedBy\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"StatusUpdatedByUser\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"}],\"dbName\":\"post_status_histories\"},\"PostMergeHistory\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"sourcePostId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"source_post_id\"},{\"name\":\"targetPostId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"target_post_id\"},{\"name\":\"performedById\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"performed_by_id\"},{\"name\":\"votesTransferred\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"votes_transferred\"},{\"name\":\"sourcePost\",\"kind\":\"object\",\"type\":\"Post\",\"relationName\":\"SourcePostMerges\"},{\"name\":\"targetPost\",\"kind\":\"object\",\"type\":\"Post\",\"relationName\":\"TargetPostMerges\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"}],\"dbName\":\"post_merge_histories\"},\"PostAttachment\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"postId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"post_id\"},{\"name\":\"fileName\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"file_name\"},{\"name\":\"fileUrl\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"file_url\"},{\"name\":\"fileSize\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"file_size\"},{\"name\":\"mimeType\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"mime_type\"},{\"name\":\"post\",\"kind\":\"object\",\"type\":\"Post\",\"relationName\":\"PostToPostAttachment\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"}],\"dbName\":\"post_attachments\"},\"Vote\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"postId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"post_id\"},{\"name\":\"voterProfileId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"voter_profile_id\"},{\"name\":\"appliedWeight\",\"kind\":\"scalar\",\"type\":\"Decimal\",\"dbName\":\"applied_weight\"},{\"name\":\"ipAddressHash\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"ip_address_hash\"},{\"name\":\"post\",\"kind\":\"object\",\"type\":\"Post\",\"relationName\":\"PostToVote\"},{\"name\":\"voterProfile\",\"kind\":\"object\",\"type\":\"VoterProfile\",\"relationName\":\"VoteToVoterProfile\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"}],\"dbName\":\"votes\"},\"VoteActivityLog\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"postId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"post_id\"},{\"name\":\"voterProfileId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"voter_profile_id\"},{\"name\":\"actionType\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"action_type\"},{\"name\":\"ipAddressHash\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"ip_address_hash\"},{\"name\":\"userAgent\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"user_agent\"},{\"name\":\"voterProfile\",\"kind\":\"object\",\"type\":\"VoterProfile\",\"relationName\":\"VoteActivityLogToVoterProfile\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"}],\"dbName\":\"vote_activity_logs\"},\"Comment\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"postId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"post_id\"},{\"name\":\"authorUserId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"author_user_id\"},{\"name\":\"parentId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"parent_id\"},{\"name\":\"authorName\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"author_name\"},{\"name\":\"content\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"isInternalNote\",\"kind\":\"scalar\",\"type\":\"Boolean\",\"dbName\":\"is_internal_note\"},{\"name\":\"isPinned\",\"kind\":\"scalar\",\"type\":\"Boolean\",\"dbName\":\"is_pinned\"},{\"name\":\"post\",\"kind\":\"object\",\"type\":\"Post\",\"relationName\":\"CommentToPost\"},{\"name\":\"authorUser\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"CommentToUser\"},{\"name\":\"parentComment\",\"kind\":\"object\",\"type\":\"Comment\",\"relationName\":\"NestedReplies\"},{\"name\":\"replies\",\"kind\":\"object\",\"type\":\"Comment\",\"relationName\":\"NestedReplies\"},{\"name\":\"reactions\",\"kind\":\"object\",\"type\":\"CommentReaction\",\"relationName\":\"CommentToCommentReaction\"},{\"name\":\"isActive\",\"kind\":\"scalar\",\"type\":\"Boolean\",\"dbName\":\"is_active\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"updated_at\"}],\"dbName\":\"comments\"},\"CommentReaction\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"commentId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"comment_id\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"user_id\"},{\"name\":\"voterId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"voter_id\"},{\"name\":\"type\",\"kind\":\"enum\",\"type\":\"ReactionType\"},{\"name\":\"comment\",\"kind\":\"object\",\"type\":\"Comment\",\"relationName\":\"CommentToCommentReaction\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"}],\"dbName\":\"comment_reactions\"},\"RoadmapView\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"workspaceId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"workspace_id\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"slug\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"isDefault\",\"kind\":\"scalar\",\"type\":\"Boolean\",\"dbName\":\"is_default\"},{\"name\":\"columnConfig\",\"kind\":\"scalar\",\"type\":\"Json\",\"dbName\":\"column_config\"},{\"name\":\"workspace\",\"kind\":\"object\",\"type\":\"Workspace\",\"relationName\":\"RoadmapViewToWorkspace\"},{\"name\":\"isActive\",\"kind\":\"scalar\",\"type\":\"Boolean\",\"dbName\":\"is_active\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"updated_at\"}],\"dbName\":\"roadmap_views\"},\"ReleaseVersion\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"workspaceId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"workspace_id\"},{\"name\":\"versionName\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"version_name\"},{\"name\":\"targetDate\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"target_date\"},{\"name\":\"releasedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"released_at\"},{\"name\":\"isPublished\",\"kind\":\"scalar\",\"type\":\"Boolean\",\"dbName\":\"is_published\"},{\"name\":\"workspace\",\"kind\":\"object\",\"type\":\"Workspace\",\"relationName\":\"ReleaseVersionToWorkspace\"},{\"name\":\"items\",\"kind\":\"object\",\"type\":\"ReleaseItem\",\"relationName\":\"ReleaseItemToReleaseVersion\"},{\"name\":\"changelog\",\"kind\":\"object\",\"type\":\"Changelog\",\"relationName\":\"ChangelogToReleaseVersion\"},{\"name\":\"isActive\",\"kind\":\"scalar\",\"type\":\"Boolean\",\"dbName\":\"is_active\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"updated_at\"}],\"dbName\":\"release_versions\"},\"ReleaseItem\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"releaseVersionId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"release_version_id\"},{\"name\":\"postId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"post_id\"},{\"name\":\"completedNote\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"completed_note\"},{\"name\":\"releaseVersion\",\"kind\":\"object\",\"type\":\"ReleaseVersion\",\"relationName\":\"ReleaseItemToReleaseVersion\"},{\"name\":\"post\",\"kind\":\"object\",\"type\":\"Post\",\"relationName\":\"PostToReleaseItem\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"}],\"dbName\":\"release_items\"},\"Changelog\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"workspaceId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"workspace_id\"},{\"name\":\"releaseVersionId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"release_version_id\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"slug\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"summary\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"bodyMarkdown\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"body_markdown\"},{\"name\":\"isPublished\",\"kind\":\"scalar\",\"type\":\"Boolean\",\"dbName\":\"is_published\"},{\"name\":\"publishedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"published_at\"},{\"name\":\"workspace\",\"kind\":\"object\",\"type\":\"Workspace\",\"relationName\":\"ChangelogToWorkspace\"},{\"name\":\"releaseVersion\",\"kind\":\"object\",\"type\":\"ReleaseVersion\",\"relationName\":\"ChangelogToReleaseVersion\"},{\"name\":\"isActive\",\"kind\":\"scalar\",\"type\":\"Boolean\",\"dbName\":\"is_active\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"updated_at\"}],\"dbName\":\"changelogs\"},\"PostSubscription\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"postId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"post_id\"},{\"name\":\"voterProfileId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"voter_profile_id\"},{\"name\":\"notifyEmail\",\"kind\":\"scalar\",\"type\":\"Boolean\",\"dbName\":\"notify_email\"},{\"name\":\"notifyInApp\",\"kind\":\"scalar\",\"type\":\"Boolean\",\"dbName\":\"notify_in_app\"},{\"name\":\"post\",\"kind\":\"object\",\"type\":\"Post\",\"relationName\":\"PostToPostSubscription\"},{\"name\":\"voterProfile\",\"kind\":\"object\",\"type\":\"VoterProfile\",\"relationName\":\"PostSubscriptionToVoterProfile\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"}],\"dbName\":\"post_subscriptions\"},\"Notification\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"user_id\"},{\"name\":\"type\",\"kind\":\"enum\",\"type\":\"NotificationType\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"message\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"actionUrl\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"action_url\"},{\"name\":\"isRead\",\"kind\":\"scalar\",\"type\":\"Boolean\",\"dbName\":\"is_read\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"NotificationToUser\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"}],\"dbName\":\"notifications\"},\"WebhookSubscription\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"workspaceId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"workspace_id\"},{\"name\":\"targetUrl\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"target_url\"},{\"name\":\"secretKey\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"secret_key\"},{\"name\":\"events\",\"kind\":\"enum\",\"type\":\"WebhookEvent\"},{\"name\":\"workspace\",\"kind\":\"object\",\"type\":\"Workspace\",\"relationName\":\"WebhookSubscriptionToWorkspace\"},{\"name\":\"isActive\",\"kind\":\"scalar\",\"type\":\"Boolean\",\"dbName\":\"is_active\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"updated_at\"}],\"dbName\":\"webhook_subscriptions\"},\"AuditLog\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"workspaceId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"workspace_id\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"user_id\"},{\"name\":\"action\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"entityType\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"entity_type\"},{\"name\":\"entityId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"entity_id\"},{\"name\":\"details\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"ipAddress\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"ip_address\"},{\"name\":\"workspace\",\"kind\":\"object\",\"type\":\"Workspace\",\"relationName\":\"AuditLogToWorkspace\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"AuditLogToUser\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"}],\"dbName\":\"audit_logs\"}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.engineWasm = {
   getRuntime: async () => require('./query_engine_bg.js'),

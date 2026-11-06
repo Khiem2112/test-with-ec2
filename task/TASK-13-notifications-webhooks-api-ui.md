@@ -5,7 +5,7 @@
 - Governing Technical Spec: [specs/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/notifications-and-webhooks/specs/v1.md)
 - Implementation Plan: [implementation-plans/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/notifications-and-webhooks/implementation-plans/v1.md)
 - Scope: frontend
-- Status: Pending
+- Status: Completed
 
 ## Flow & Spec Traceability
 
@@ -41,14 +41,14 @@ Build API route handlers for in-app notifications, webhooks registration, and au
 
 ## Checklist
 
-- [ ] Implement `src/app/api/v1/notifications/route.ts` adhering to Spec Section 4.1 supporting pagination and unreadOnly filters.
-- [ ] Implement `src/app/api/v1/webhooks/route.ts` adhering to Spec Section 4.2 with secretKey generation.
-- [ ] Implement `src/app/api/v1/audit-logs/route.ts` with date range and entityType filtering.
-- [ ] Implement Server Actions in `src/actions/notification.actions.ts` to mark notifications as read and update subscription channels.
-- [ ] Create `src/components/notifications/notification-bell.tsx` displaying real-time unread badge and dropdown list (Flow Touchpoint 1).
-- [ ] Create `src/components/notifications/subscription-toggle.tsx` for following/unfollowing posts with channel preference modal (Flow Touchpoint 3).
-- [ ] Create `src/components/audit/audit-log-table.tsx` providing search and collapsible JSON payload inspector (Flow Touchpoint 5).
-- [ ] Run `npm run check` and verify exit code 0.
+- [x] Implement `src/app/api/v1/notifications/route.ts` adhering to Spec Section 4.1 supporting pagination and unreadOnly filters.
+- [x] Implement `src/app/api/v1/webhooks/route.ts` adhering to Spec Section 4.2 with secretKey generation.
+- [x] Implement `src/app/api/v1/audit-logs/route.ts` with date range and entityType filtering.
+- [x] Implement Server Actions in `src/actions/notification.actions.ts` to mark notifications as read and update subscription channels.
+- [x] Create `src/components/notifications/notification-bell.tsx` displaying real-time unread badge and dropdown list (Flow Touchpoint 1).
+- [x] Create `src/components/notifications/subscription-toggle.tsx` for following/unfollowing posts with channel preference modal (Flow Touchpoint 3).
+- [x] Create `src/components/audit/audit-log-table.tsx` providing search and collapsible JSON payload inspector (Flow Touchpoint 5).
+- [x] Run `npm run check` and verify exit code 0.
 
 ## Acceptance Criteria
 

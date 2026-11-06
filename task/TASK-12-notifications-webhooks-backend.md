@@ -5,7 +5,7 @@
 - Governing Technical Spec: [specs/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/notifications-and-webhooks/specs/v1.md)
 - Implementation Plan: [implementation-plans/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/notifications-and-webhooks/implementation-plans/v1.md)
 - Scope: backend
-- Status: Pending
+- Status: Completed
 
 ## Flow & Spec Traceability
 
@@ -42,14 +42,14 @@ Build backend types, Zod validation schemas, auto-subscription triggers, in-app 
 
 ## Checklist
 
-- [ ] Create `src/types/notification.ts` defining types for PostSubscription, Notification, WebhookSubscription, and AuditLog according to Spec Section 2.
-- [ ] Create `src/schemas/notification.schema.ts` and `src/schemas/webhook.schema.ts` defining Zod validation schemas.
-- [ ] Implement `src/services/subscription.service.ts` managing auto-subscription on post creation, voting, and commenting with independent channel toggles (Spec AC-01, Flow Primary Path 1).
-- [ ] Implement `src/services/notification.service.ts` generating notifications by type (STATUS_CHANGED, NEW_COMMENT, OFFICIAL_RESPONSE, FEATURE_RELEASED, MENTIONED) and tracking read state (Spec AC-02).
-- [ ] Implement `src/services/webhook.service.ts` generating crypto-secure 32-character secretKey, computing HMAC SHA-256 hex digest header, and queueing webhook deliveries (Spec AC-03, AC-04, Flow Primary Path 2).
-- [ ] Implement `src/services/audit.service.ts` providing append-only audit logging with actor userId, workspaceId, entityType, entityId, IP address, and details JSON (Spec AC-05).
-- [ ] Ensure all exported functions contain explicit return type annotations and zero any types.
-- [ ] Run `npm run check:be` and verify exit code 0.
+- [x] Create `src/types/notification.ts` defining types for PostSubscription, Notification, WebhookSubscription, and AuditLog according to Spec Section 2.
+- [x] Create `src/schemas/notification.schema.ts` and `src/schemas/webhook.schema.ts` defining Zod validation schemas.
+- [x] Implement `src/services/subscription.service.ts` managing auto-subscription on post creation, voting, and commenting with independent channel toggles (Spec AC-01, Flow Primary Path 1).
+- [x] Implement `src/services/notification.service.ts` generating notifications by type (STATUS_CHANGED, NEW_COMMENT, OFFICIAL_RESPONSE, FEATURE_RELEASED, MENTIONED) and tracking read state (Spec AC-02).
+- [x] Implement `src/services/webhook.service.ts` generating crypto-secure 32-character secretKey, computing HMAC SHA-256 hex digest header, and queueing webhook deliveries (Spec AC-03, AC-04, Flow Primary Path 2).
+- [x] Implement `src/services/audit.service.ts` providing append-only audit logging with actor userId, workspaceId, entityType, entityId, IP address, and details JSON (Spec AC-05).
+- [x] Ensure all exported functions contain explicit return type annotations and zero any types.
+- [x] Run `npm run check:be` and verify exit code 0.
 
 ## Acceptance Criteria
 

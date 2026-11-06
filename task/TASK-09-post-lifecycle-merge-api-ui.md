@@ -5,7 +5,7 @@
 - Governing Technical Spec: [specs/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/post-lifecycle-merge/specs/v1.md)
 - Implementation Plan: [implementation-plans/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/post-lifecycle-merge/implementation-plans/v1.md)
 - Scope: frontend
-- Status: Pending
+- Status: Completed
 
 ## Flow & Spec Traceability
 
@@ -41,13 +41,13 @@ Build API route handlers for status transitions and post merging, alongside admi
 
 ## Checklist
 
-- [ ] Implement `src/app/api/v1/posts/[id]/status/route.ts` adhering to Spec Section 4.1 with Admin/PM authorization check.
-- [ ] Implement `src/app/api/v1/posts/[id]/merge/route.ts` adhering to Spec Section 4.2 handling merge execution and error responses.
-- [ ] Implement Server Actions in `src/actions/status.actions.ts` and `src/actions/merge.actions.ts`.
-- [ ] Create `src/components/lifecycle/status-transition-dialog.tsx` with status select dropdown, change note textarea, and subscriber recipient count preview (Flow Touchpoint 2).
-- [ ] Create `src/components/lifecycle/merge-drawer.tsx` providing live target post search, transferred votes diff preview, and confirmation challenge (Flow Touchpoint 3).
-- [ ] Create `src/components/lifecycle/merged-notice-banner.tsx` rendering redirect banner on merged posts (Flow Touchpoint 4).
-- [ ] Run `npm run check` and verify exit code 0.
+- [x] Implement `src/app/api/v1/posts/[id]/status/route.ts` adhering to Spec Section 4.1 with Admin/PM authorization check.
+- [x] Implement `src/app/api/v1/posts/[id]/merge/route.ts` adhering to Spec Section 4.2 handling merge execution and error responses.
+- [x] Implement Server Actions in `src/actions/status.actions.ts` and `src/actions/merge.actions.ts`.
+- [x] Create `src/components/lifecycle/status-transition-dialog.tsx` with status select dropdown, change note textarea, and subscriber recipient count preview (Flow Touchpoint 2).
+- [x] Create `src/components/lifecycle/merge-drawer.tsx` providing live target post search, transferred votes diff preview, and confirmation challenge (Flow Touchpoint 3).
+- [x] Create `src/components/lifecycle/merged-notice-banner.tsx` rendering redirect banner on merged posts (Flow Touchpoint 4).
+- [x] Run `npm run check` and verify exit code 0.
 
 ## Acceptance Criteria
 

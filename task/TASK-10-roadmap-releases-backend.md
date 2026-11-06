@@ -5,7 +5,7 @@
 - Governing Technical Spec: [specs/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/roadmap-and-releases/specs/v1.md)
 - Implementation Plan: [implementation-plans/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/roadmap-and-releases/implementation-plans/v1.md)
 - Scope: backend
-- Status: Pending
+- Status: Completed
 
 ## Flow & Spec Traceability
 
@@ -40,13 +40,13 @@ Build backend types, Zod validation schemas, Kanban column grouping services, re
 
 ## Checklist
 
-- [ ] Create `src/types/roadmap.ts` defining types for RoadmapView, RoadmapColumn, ReleaseVersion, ReleaseItem, and Changelog according to Spec Section 2.
-- [ ] Create `src/schemas/roadmap.schema.ts` defining Zod validation schemas for roadmap query filters, release version payload, and changelog markdown submission.
-- [ ] Implement `src/services/roadmap.service.ts` with getRoadmapColumns retrieving active statuses where showOnRoadmap = true and fetching posts ordered by totalScoreWeight descending (Spec AC-01, Flow Primary Path 1).
-- [ ] Implement `src/services/release.service.ts` supporting createReleaseVersion with unique versionName per workspace, and attachCompletedPosts to link posts via release_items (Spec AC-03, AC-04, Flow Primary Path 2).
-- [ ] Implement `src/services/changelog.service.ts` supporting draft creation, markdown rendering, and publishing with publishedAt timestamp (Spec AC-05).
-- [ ] Ensure all exported functions contain explicit return type annotations and zero any types.
-- [ ] Run `npm run check:be` and verify exit code 0.
+- [x] Create `src/types/roadmap.ts` defining types for RoadmapView, RoadmapColumn, ReleaseVersion, ReleaseItem, and Changelog according to Spec Section 2.
+- [x] Create `src/schemas/roadmap.schema.ts` defining Zod validation schemas for roadmap query filters, release version payload, and changelog markdown submission.
+- [x] Implement `src/services/roadmap.service.ts` with getRoadmapColumns retrieving active statuses where showOnRoadmap = true and fetching posts ordered by totalScoreWeight descending (Spec AC-01, Flow Primary Path 1).
+- [x] Implement `src/services/release.service.ts` supporting createReleaseVersion with unique versionName per workspace, and attachCompletedPosts to link posts via release_items (Spec AC-03, AC-04, Flow Primary Path 2).
+- [x] Implement `src/services/changelog.service.ts` supporting draft creation, markdown rendering, and publishing with publishedAt timestamp (Spec AC-05).
+- [x] Ensure all exported functions contain explicit return type annotations and zero any types.
+- [x] Run `npm run check:be` and verify exit code 0.
 
 ## Acceptance Criteria
 

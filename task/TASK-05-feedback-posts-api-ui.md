@@ -5,7 +5,7 @@
 - Governing Technical Spec: [specs/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/feedback-posts/specs/v1.md)
 - Implementation Plan: [implementation-plans/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/feedback-posts/implementation-plans/v1.md)
 - Scope: frontend
-- Status: Pending
+- Status: Completed
 
 ## Flow & Spec Traceability
 
@@ -42,13 +42,13 @@ Deliver API route handlers for live similarity search and post ingestion, alongs
 
 ## Checklist
 
-- [ ] Implement `src/app/api/v1/posts/search-similar/route.ts` fulfilling Spec Section 4.1 contract with minimum 3-character query threshold and ranked results.
-- [ ] Implement `src/app/api/v1/posts/route.ts` fulfilling Spec Section 4.2 contract handling post creation and attachment bounds.
-- [ ] Implement Server Actions in `src/actions/post.actions.ts` for post submission, tag mutation, and moderator approval.
-- [ ] Create `src/components/posts/post-submission-dialog.tsx` implementing the modal dialog with 300ms debounced similarity triggers.
-- [ ] Create `src/components/posts/similar-posts-panel.tsx` implementing Branch 1 (instant upvote of existing thread) and Branch 2 (continue new post submission).
-- [ ] Create `src/components/posts/board-feed-view.tsx` supporting category filtering, tag selection, and sorting options (Most Popular, Newest, Trending).
-- [ ] Run `npm run check` and verify exit code 0.
+- [x] Implement `src/app/api/v1/posts/search-similar/route.ts` fulfilling Spec Section 4.1 contract with minimum 3-character query threshold and ranked results.
+- [x] Implement `src/app/api/v1/posts/route.ts` fulfilling Spec Section 4.2 contract handling post creation and attachment bounds.
+- [x] Implement Server Actions in `src/actions/post.actions.ts` for post submission, tag mutation, and moderator approval.
+- [x] Create `src/components/posts/post-submission-dialog.tsx` implementing the modal dialog with 300ms debounced similarity triggers.
+- [x] Create `src/components/posts/similar-posts-panel.tsx` implementing Branch 1 (instant upvote of existing thread) and Branch 2 (continue new post submission).
+- [x] Create `src/components/posts/board-feed-view.tsx` supporting category filtering, tag selection, and sorting options (Most Popular, Newest, Trending).
+- [x] Run `npm run check` and verify exit code 0.
 
 ## Acceptance Criteria
 

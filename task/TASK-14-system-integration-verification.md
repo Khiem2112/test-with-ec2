@@ -5,7 +5,7 @@
 - Governing Specs: All 6 Technical Specifications in docs/*/specs/v1.md
 - Implementation Plans: All 6 Implementation Plans in docs/*/implementation-plans/v1.md
 - Scope: shared
-- Status: Pending
+- Status: Completed
 
 ## Flow & Spec Traceability
 
@@ -40,15 +40,15 @@ Consolidate barrel exports across types, schemas, services, actions, and compone
 
 ## Checklist
 
-- [ ] Export all feature types cleanly in `src/types/index.ts` without circular dependencies.
-- [ ] Export all domain services cleanly in `src/services/index.ts`.
-- [ ] Export all server actions in `src/actions/index.ts`.
-- [ ] Export reusable UI components in `src/components/index.ts`.
-- [ ] Execute `npx tsx prisma/seed.ts` to verify seed data integrity and foreign key cascades across all 20 database models.
-- [ ] Run automated gate `npm run check:be` (typecheck) and verify exit code 0.
-- [ ] Run automated gate `npm run check:fe` (build and lint) and verify exit code 0.
-- [ ] Audit repository files to confirm zero emojis, zero icons, and zero numbered comments.
-- [ ] Run `npm run check` and verify overall exit code 0.
+- [x] Export all feature types cleanly in `src/types/index.ts` without circular dependencies.
+- [x] Export all domain services cleanly in `src/services/index.ts`.
+- [x] Export all server actions in `src/actions/index.ts`.
+- [x] Export reusable UI components in `src/components/index.ts`.
+- [x] Execute `npx tsx prisma/seed.ts` to verify seed data integrity and foreign key cascades across all 20 database models.
+- [x] Run automated gate `npm run check:be` (typecheck) and verify exit code 0.
+- [x] Run automated gate `npm run check:fe` (build and lint) and verify exit code 0.
+- [x] Audit repository files to confirm zero emojis, zero icons, and zero numbered comments.
+- [x] Run `npm run check` and verify overall exit code 0.
 
 ## Acceptance Criteria
 

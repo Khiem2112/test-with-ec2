@@ -115,40 +115,306 @@ Prisma.NullTypes = {
  */
 
 exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
+  ReadUncommitted: 'ReadUncommitted',
+  ReadCommitted: 'ReadCommitted',
+  RepeatableRead: 'RepeatableRead',
   Serializable: 'Serializable'
 });
+
+exports.Prisma.WorkspaceScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  slug: 'slug',
+  customDomain: 'customDomain',
+  brandingConfig: 'brandingConfig',
+  isPublicPortal: 'isPublicPortal',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
 
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   email: 'email',
-  name: 'name',
-  role: 'role',
+  fullName: 'fullName',
+  avatarUrl: 'avatarUrl',
+  passwordHash: 'passwordHash',
+  isActive: 'isActive',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  isActive: 'isActive'
+  updatedAt: 'updatedAt'
 };
 
-exports.Prisma.ProjectScalarFieldEnum = {
+exports.Prisma.WorkspaceMemberScalarFieldEnum = {
   id: 'id',
+  workspaceId: 'workspaceId',
+  userId: 'userId',
+  role: 'role',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.UserSessionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  tokenHash: 'tokenHash',
+  ipAddress: 'ipAddress',
+  userAgent: 'userAgent',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.VoterProfileScalarFieldEnum = {
+  id: 'id',
+  workspaceId: 'workspaceId',
+  authType: 'authType',
+  externalUserId: 'externalUserId',
+  displayName: 'displayName',
+  email: 'email',
+  fingerprintHash: 'fingerprintHash',
+  customerTier: 'customerTier',
+  voteWeight: 'voteWeight',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.BoardScalarFieldEnum = {
+  id: 'id',
+  workspaceId: 'workspaceId',
   name: 'name',
   slug: 'slug',
   description: 'description',
-  ownerId: 'ownerId',
+  isPublic: 'isPublic',
+  isModerated: 'isModerated',
+  displayOrder: 'displayOrder',
+  isActive: 'isActive',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  isActive: 'isActive'
+  updatedAt: 'updatedAt'
 };
 
-exports.Prisma.TaskScalarFieldEnum = {
+exports.Prisma.CategoryScalarFieldEnum = {
   id: 'id',
-  projectId: 'projectId',
-  title: 'title',
-  status: 'status',
-  targetFiles: 'targetFiles',
-  checklist: 'checklist',
+  boardId: 'boardId',
+  name: 'name',
+  slug: 'slug',
+  description: 'description',
+  displayOrder: 'displayOrder',
+  isActive: 'isActive',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  isActive: 'isActive'
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.TagScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  slug: 'slug',
+  colorHex: 'colorHex',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PostTagScalarFieldEnum = {
+  postId: 'postId',
+  tagId: 'tagId',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.PostStatusScalarFieldEnum = {
+  id: 'id',
+  workspaceId: 'workspaceId',
+  name: 'name',
+  key: 'key',
+  category: 'category',
+  colorHex: 'colorHex',
+  showOnRoadmap: 'showOnRoadmap',
+  displayOrder: 'displayOrder',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PostScalarFieldEnum = {
+  id: 'id',
+  boardId: 'boardId',
+  categoryId: 'categoryId',
+  statusId: 'statusId',
+  authorUserId: 'authorUserId',
+  voterProfileId: 'voterProfileId',
+  title: 'title',
+  slug: 'slug',
+  content: 'content',
+  totalVotesCount: 'totalVotesCount',
+  totalScoreWeight: 'totalScoreWeight',
+  commentsCount: 'commentsCount',
+  isPinned: 'isPinned',
+  isLocked: 'isLocked',
+  mergedIntoPostId: 'mergedIntoPostId',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PostStatusHistoryScalarFieldEnum = {
+  id: 'id',
+  postId: 'postId',
+  oldStatusId: 'oldStatusId',
+  newStatusId: 'newStatusId',
+  changedById: 'changedById',
+  changeNote: 'changeNote',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.PostMergeHistoryScalarFieldEnum = {
+  id: 'id',
+  sourcePostId: 'sourcePostId',
+  targetPostId: 'targetPostId',
+  performedById: 'performedById',
+  votesTransferred: 'votesTransferred',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.PostAttachmentScalarFieldEnum = {
+  id: 'id',
+  postId: 'postId',
+  fileName: 'fileName',
+  fileUrl: 'fileUrl',
+  fileSize: 'fileSize',
+  mimeType: 'mimeType',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.VoteScalarFieldEnum = {
+  id: 'id',
+  postId: 'postId',
+  voterProfileId: 'voterProfileId',
+  appliedWeight: 'appliedWeight',
+  ipAddressHash: 'ipAddressHash',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.VoteActivityLogScalarFieldEnum = {
+  id: 'id',
+  postId: 'postId',
+  voterProfileId: 'voterProfileId',
+  actionType: 'actionType',
+  ipAddressHash: 'ipAddressHash',
+  userAgent: 'userAgent',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.CommentScalarFieldEnum = {
+  id: 'id',
+  postId: 'postId',
+  authorUserId: 'authorUserId',
+  parentId: 'parentId',
+  authorName: 'authorName',
+  content: 'content',
+  isInternalNote: 'isInternalNote',
+  isPinned: 'isPinned',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CommentReactionScalarFieldEnum = {
+  id: 'id',
+  commentId: 'commentId',
+  userId: 'userId',
+  voterId: 'voterId',
+  type: 'type',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.RoadmapViewScalarFieldEnum = {
+  id: 'id',
+  workspaceId: 'workspaceId',
+  name: 'name',
+  slug: 'slug',
+  isDefault: 'isDefault',
+  columnConfig: 'columnConfig',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ReleaseVersionScalarFieldEnum = {
+  id: 'id',
+  workspaceId: 'workspaceId',
+  versionName: 'versionName',
+  targetDate: 'targetDate',
+  releasedAt: 'releasedAt',
+  isPublished: 'isPublished',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ReleaseItemScalarFieldEnum = {
+  id: 'id',
+  releaseVersionId: 'releaseVersionId',
+  postId: 'postId',
+  completedNote: 'completedNote',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.ChangelogScalarFieldEnum = {
+  id: 'id',
+  workspaceId: 'workspaceId',
+  releaseVersionId: 'releaseVersionId',
+  title: 'title',
+  slug: 'slug',
+  summary: 'summary',
+  bodyMarkdown: 'bodyMarkdown',
+  isPublished: 'isPublished',
+  publishedAt: 'publishedAt',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PostSubscriptionScalarFieldEnum = {
+  id: 'id',
+  postId: 'postId',
+  voterProfileId: 'voterProfileId',
+  notifyEmail: 'notifyEmail',
+  notifyInApp: 'notifyInApp',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.NotificationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  type: 'type',
+  title: 'title',
+  message: 'message',
+  actionUrl: 'actionUrl',
+  isRead: 'isRead',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.WebhookSubscriptionScalarFieldEnum = {
+  id: 'id',
+  workspaceId: 'workspaceId',
+  targetUrl: 'targetUrl',
+  secretKey: 'secretKey',
+  events: 'events',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.AuditLogScalarFieldEnum = {
+  id: 'id',
+  workspaceId: 'workspaceId',
+  userId: 'userId',
+  action: 'action',
+  entityType: 'entityType',
+  entityId: 'entityId',
+  details: 'details',
+  ipAddress: 'ipAddress',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -156,16 +422,100 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
+exports.Prisma.JsonNullValueInput = {
+  JsonNull: Prisma.JsonNull
+};
+
+exports.Prisma.QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
+};
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
+};
+
 exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+exports.WorkspaceRole = exports.$Enums.WorkspaceRole = {
+  OWNER: 'OWNER',
+  ADMIN: 'ADMIN',
+  PRODUCT_MANAGER: 'PRODUCT_MANAGER',
+  DEVELOPER: 'DEVELOPER',
+  MODERATOR: 'MODERATOR'
+};
 
+exports.VoterAuthType = exports.$Enums.VoterAuthType = {
+  REGISTERED: 'REGISTERED',
+  SSO_IDENTIFIED: 'SSO_IDENTIFIED',
+  ANONYMOUS_FINGERPRINT: 'ANONYMOUS_FINGERPRINT'
+};
+
+exports.StatusCategory = exports.$Enums.StatusCategory = {
+  BACKLOG: 'BACKLOG',
+  UNSCHEDULED: 'UNSCHEDULED',
+  PLANNED: 'PLANNED',
+  IN_PROGRESS: 'IN_PROGRESS',
+  COMPLETED: 'COMPLETED',
+  CLOSED: 'CLOSED',
+  DECLINED: 'DECLINED'
+};
+
+exports.ReactionType = exports.$Enums.ReactionType = {
+  THUMBS_UP: 'THUMBS_UP',
+  THUMBS_DOWN: 'THUMBS_DOWN',
+  HEART: 'HEART',
+  ROCKET: 'ROCKET',
+  INSIGHTFUL: 'INSIGHTFUL'
+};
+
+exports.NotificationType = exports.$Enums.NotificationType = {
+  STATUS_CHANGED: 'STATUS_CHANGED',
+  NEW_COMMENT: 'NEW_COMMENT',
+  OFFICIAL_RESPONSE: 'OFFICIAL_RESPONSE',
+  FEATURE_RELEASED: 'FEATURE_RELEASED',
+  MENTIONED: 'MENTIONED'
+};
+
+exports.WebhookEvent = exports.$Enums.WebhookEvent = {
+  POST_CREATED: 'POST_CREATED',
+  POST_STATUS_CHANGED: 'POST_STATUS_CHANGED',
+  POST_MERGED: 'POST_MERGED',
+  COMMENT_ADDED: 'COMMENT_ADDED',
+  RELEASE_PUBLISHED: 'RELEASE_PUBLISHED'
+};
 
 exports.Prisma.ModelName = {
+  Workspace: 'Workspace',
   User: 'User',
-  Project: 'Project',
-  Task: 'Task'
+  WorkspaceMember: 'WorkspaceMember',
+  UserSession: 'UserSession',
+  VoterProfile: 'VoterProfile',
+  Board: 'Board',
+  Category: 'Category',
+  Tag: 'Tag',
+  PostTag: 'PostTag',
+  PostStatus: 'PostStatus',
+  Post: 'Post',
+  PostStatusHistory: 'PostStatusHistory',
+  PostMergeHistory: 'PostMergeHistory',
+  PostAttachment: 'PostAttachment',
+  Vote: 'Vote',
+  VoteActivityLog: 'VoteActivityLog',
+  Comment: 'Comment',
+  CommentReaction: 'CommentReaction',
+  RoadmapView: 'RoadmapView',
+  ReleaseVersion: 'ReleaseVersion',
+  ReleaseItem: 'ReleaseItem',
+  Changelog: 'Changelog',
+  PostSubscription: 'PostSubscription',
+  Notification: 'Notification',
+  WebhookSubscription: 'WebhookSubscription',
+  AuditLog: 'AuditLog'
 };
 
 /**

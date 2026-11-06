@@ -4,52 +4,576 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum WorkspaceRole {
+  OWNER
+  ADMIN
+  PRODUCT_MANAGER
+  DEVELOPER
+  MODERATOR
+}
+
+enum VoterAuthType {
+  REGISTERED
+  SSO_IDENTIFIED
+  ANONYMOUS_FINGERPRINT
+}
+
+enum StatusCategory {
+  BACKLOG
+  UNSCHEDULED
+  PLANNED
+  IN_PROGRESS
+  COMPLETED
+  CLOSED
+  DECLINED
+}
+
+enum ReactionType {
+  THUMBS_UP
+  THUMBS_DOWN
+  HEART
+  ROCKET
+  INSIGHTFUL
+}
+
+enum NotificationType {
+  STATUS_CHANGED
+  NEW_COMMENT
+  OFFICIAL_RESPONSE
+  FEATURE_RELEASED
+  MENTIONED
+}
+
+enum WebhookEvent {
+  POST_CREATED
+  POST_STATUS_CHANGED
+  POST_MERGED
+  COMMENT_ADDED
+  RELEASE_PUBLISHED
+}
+
+// -------------------------------------------------------------
+// NHOM 1: KHONG GIAN LAM VIEC VA DINH DANH (MODELS 1 - 5)
+// -------------------------------------------------------------
+
+model Workspace {
+  id              String                @id @default(uuid())
+  name            String
+  slug            String                @unique
+  customDomain    String?               @unique @map("custom_domain")
+  brandingConfig  Json                  @default("{}") @map("branding_config")
+  isPublicPortal  Boolean               @default(true) @map("is_public_portal")
+  members         WorkspaceMember[]
+  boards          Board[]
+  statuses        PostStatus[]
+  roadmapViews    RoadmapView[]
+  releaseVersions ReleaseVersion[]
+  changelogs      Changelog[]
+  webhooks        WebhookSubscription[]
+  auditLogs       AuditLog[]
+  voterProfiles   VoterProfile[]
+
+  isActive  Boolean  @default(true) @map("is_active")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("workspaces")
 }
 
 model User {
-  id        String   @id @default(uuid())
-  email     String   @unique
-  name      String
-  role      String   @default("operator")
+  id            String              @id @default(uuid())
+  email         String              @unique
+  fullName      String              @map("full_name")
+  avatarUrl     String?             @map("avatar_url")
+  passwordHash  String?             @map("password_hash")
+  memberships   WorkspaceMember[]
+  sessions      UserSession[]
+  authoredPosts Post[]              @relation("UserAuthoredPosts")
+  comments      Comment[]
+  statusUpdates PostStatusHistory[] @relation("StatusUpdatedByUser")
+  auditLogs     AuditLog[]
+  notifications Notification[]
+
+  isActive  Boolean  @default(true) @map("is_active")
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
-  isActive  Boolean  @default(true) @map("is_active")
-
-  projects Project[]
 
   @@map("users")
 }
 
-model Project {
-  id          String   @id @default(uuid())
-  name        String
-  slug        String   @unique
-  description String?
-  ownerId     String   @map("owner_id")
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @updatedAt @map("updated_at")
-  isActive    Boolean  @default(true) @map("is_active")
+model WorkspaceMember {
+  id          Int           @id @default(autoincrement())
+  workspaceId String        @map("workspace_id")
+  userId      String        @map("user_id")
+  role        WorkspaceRole @default(DEVELOPER)
 
-  owner User   @relation(fields: [ownerId], references: [id], onDelete: Cascade)
-  tasks Task[]
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@map("projects")
+  isActive  Boolean  @default(true) @map("is_active")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@unique([workspaceId, userId])
+  @@map("workspace_members")
 }
 
-model Task {
-  id          String   @id @default(uuid())
-  projectId   String   @map("project_id")
-  title       String
-  status      String   @default("pending")
-  targetFiles String   @default("[]") @map("target_files")
-  checklist   String   @default("[]")
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @updatedAt @map("updated_at")
-  isActive    Boolean  @default(true) @map("is_active")
+model UserSession {
+  id        String   @id @default(uuid())
+  userId    String   @map("user_id")
+  tokenHash String   @unique @map("token_hash")
+  ipAddress String?  @map("ip_address")
+  userAgent String?  @map("user_agent")
+  expiresAt DateTime @map("expires_at")
 
-  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@map("tasks")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("user_sessions")
+}
+
+model VoterProfile {
+  id              String        @id @default(uuid())
+  workspaceId     String        @map("workspace_id")
+  authType        VoterAuthType @default(REGISTERED) @map("auth_type")
+  externalUserId  String?       @map("external_user_id")
+  displayName     String        @map("display_name")
+  email           String?
+  fingerprintHash String?       @map("fingerprint_hash")
+  customerTier    String        @default("standard") @map("customer_tier")
+  voteWeight      Decimal       @default(1.00) @map("vote_weight") @db.Decimal(5, 2)
+
+  workspace     Workspace          @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  votes         Vote[]
+  voteLogs      VoteActivityLog[]
+  subscriptions PostSubscription[]
+
+  isActive  Boolean  @default(true) @map("is_active")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@unique([workspaceId, externalUserId])
+  @@index([workspaceId, fingerprintHash])
+  @@map("voter_profiles")
+}
+
+// -------------------------------------------------------------
+// NHOM 2: CAU TRUC BANG PHAN HOI VA PHAN LOAI (MODELS 6 - 9)
+// -------------------------------------------------------------
+
+model Board {
+  id           String  @id @default(uuid())
+  workspaceId  String  @map("workspace_id")
+  name         String
+  slug         String
+  description  String? @db.Text
+  isPublic     Boolean @default(true) @map("is_public")
+  isModerated  Boolean @default(false) @map("is_moderated")
+  displayOrder Int     @default(0) @map("display_order")
+
+  workspace  Workspace  @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  categories Category[]
+  posts      Post[]
+
+  isActive  Boolean  @default(true) @map("is_active")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@unique([workspaceId, slug])
+  @@map("boards")
+}
+
+model Category {
+  id           Int     @id @default(autoincrement())
+  boardId      String  @map("board_id")
+  name         String
+  slug         String
+  description  String?
+  displayOrder Int     @default(0) @map("display_order")
+
+  board Board  @relation(fields: [boardId], references: [id], onDelete: Cascade)
+  posts Post[]
+
+  isActive  Boolean  @default(true) @map("is_active")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@unique([boardId, slug])
+  @@map("categories")
+}
+
+model Tag {
+  id       Int       @id @default(autoincrement())
+  name     String
+  slug     String    @unique
+  colorHex String    @default("#6B7280") @map("color_hex")
+  posts    PostTag[]
+
+  isActive  Boolean  @default(true) @map("is_active")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("tags")
+}
+
+model PostTag {
+  postId String @map("post_id")
+  tagId  Int    @map("tag_id")
+
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  tag  Tag  @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@id([postId, tagId])
+  @@map("post_tags")
+}
+
+// -------------------------------------------------------------
+// NHOM 3: VONG DOI YEU CAU TINH NANG (MODELS 10 - 14)
+// -------------------------------------------------------------
+
+model PostStatus {
+  id            Int            @id @default(autoincrement())
+  workspaceId   String         @map("workspace_id")
+  name          String
+  key           String
+  category      StatusCategory @default(BACKLOG)
+  colorHex      String         @default("#3B82F6") @map("color_hex")
+  showOnRoadmap Boolean        @default(false) @map("show_on_roadmap")
+  displayOrder  Int            @default(0) @map("display_order")
+
+  workspace     Workspace           @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  posts         Post[]
+  sourceHistory PostStatusHistory[] @relation("OldStatusRelation")
+  targetHistory PostStatusHistory[] @relation("NewStatusRelation")
+
+  isActive  Boolean  @default(true) @map("is_active")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@unique([workspaceId, key])
+  @@map("post_statuses")
+}
+
+model Post {
+  id               String  @id @default(uuid())
+  boardId          String  @map("board_id")
+  categoryId       Int?    @map("category_id")
+  statusId         Int     @map("status_id")
+  authorUserId     String? @map("author_user_id")
+  voterProfileId   String? @map("voter_profile_id")
+  title            String
+  slug             String
+  content          String  @db.Text
+  totalVotesCount  Int     @default(0) @map("total_votes_count")
+  totalScoreWeight Decimal @default(0.00) @map("total_score_weight") @db.Decimal(10, 2)
+  commentsCount    Int     @default(0) @map("comments_count")
+  isPinned         Boolean @default(false) @map("is_pinned")
+  isLocked         Boolean @default(false) @map("is_locked")
+  mergedIntoPostId String? @map("merged_into_post_id")
+
+  board         Board      @relation(fields: [boardId], references: [id], onDelete: Cascade)
+  category      Category?  @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  status        PostStatus @relation(fields: [statusId], references: [id], onDelete: Restrict)
+  authorUser    User?      @relation("UserAuthoredPosts", fields: [authorUserId], references: [id], onDelete: SetNull)
+  mergedTarget  Post?      @relation("MergedPosts", fields: [mergedIntoPostId], references: [id], onDelete: SetNull)
+  mergedSources Post[]     @relation("MergedPosts")
+
+  tags               PostTag[]
+  attachments        PostAttachment[]
+  votes              Vote[]
+  comments           Comment[]
+  statusHistories    PostStatusHistory[]
+  mergeHistoriesTo   PostMergeHistory[]  @relation("TargetPostMerges")
+  mergeHistoriesFrom PostMergeHistory[]  @relation("SourcePostMerges")
+  subscriptions      PostSubscription[]
+  releaseItems       ReleaseItem[]
+
+  isActive  Boolean  @default(true) @map("is_active")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@unique([boardId, slug])
+  @@index([boardId, statusId])
+  @@index([totalScoreWeight(sort: Desc)])
+  @@map("posts")
+}
+
+model PostStatusHistory {
+  id          Int     @id @default(autoincrement())
+  postId      String  @map("post_id")
+  oldStatusId Int?    @map("old_status_id")
+  newStatusId Int     @map("new_status_id")
+  changedById String? @map("changed_by_id")
+  changeNote  String? @map("change_note") @db.Text
+
+  post      Post        @relation(fields: [postId], references: [id], onDelete: Cascade)
+  oldStatus PostStatus? @relation("OldStatusRelation", fields: [oldStatusId], references: [id], onDelete: SetNull)
+  newStatus PostStatus  @relation("NewStatusRelation", fields: [newStatusId], references: [id], onDelete: Restrict)
+  changedBy User?       @relation("StatusUpdatedByUser", fields: [changedById], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("post_status_histories")
+}
+
+model PostMergeHistory {
+  id               Int     @id @default(autoincrement())
+  sourcePostId     String  @map("source_post_id")
+  targetPostId     String  @map("target_post_id")
+  performedById    String? @map("performed_by_id")
+  votesTransferred Int     @default(0) @map("votes_transferred")
+
+  sourcePost Post @relation("SourcePostMerges", fields: [sourcePostId], references: [id], onDelete: Cascade)
+  targetPost Post @relation("TargetPostMerges", fields: [targetPostId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("post_merge_histories")
+}
+
+model PostAttachment {
+  id       String @id @default(uuid())
+  postId   String @map("post_id")
+  fileName String @map("file_name")
+  fileUrl  String @map("file_url")
+  fileSize Int    @map("file_size")
+  mimeType String @map("mime_type")
+
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("post_attachments")
+}
+
+// -------------------------------------------------------------
+// NHOM 4: BINH CHON VA THAO LUAN CONG DONG (MODELS 15 - 18)
+// -------------------------------------------------------------
+
+model Vote {
+  id             Int     @id @default(autoincrement())
+  postId         String  @map("post_id")
+  voterProfileId String  @map("voter_profile_id")
+  appliedWeight  Decimal @default(1.00) @map("applied_weight") @db.Decimal(5, 2)
+  ipAddressHash  String? @map("ip_address_hash")
+
+  post         Post         @relation(fields: [postId], references: [id], onDelete: Cascade)
+  voterProfile VoterProfile @relation(fields: [voterProfileId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@unique([postId, voterProfileId])
+  @@map("votes")
+}
+
+model VoteActivityLog {
+  id             Int     @id @default(autoincrement())
+  postId         String  @map("post_id")
+  voterProfileId String  @map("voter_profile_id")
+  actionType     String  @map("action_type")
+  ipAddressHash  String? @map("ip_address_hash")
+  userAgent      String? @map("user_agent")
+
+  voterProfile VoterProfile @relation(fields: [voterProfileId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("vote_activity_logs")
+}
+
+model Comment {
+  id             String  @id @default(uuid())
+  postId         String  @map("post_id")
+  authorUserId   String? @map("author_user_id")
+  parentId       String? @map("parent_id")
+  authorName     String  @map("author_name")
+  content        String  @db.Text
+  isInternalNote Boolean @default(false) @map("is_internal_note")
+  isPinned       Boolean @default(false) @map("is_pinned")
+
+  post          Post              @relation(fields: [postId], references: [id], onDelete: Cascade)
+  authorUser    User?             @relation(fields: [authorUserId], references: [id], onDelete: SetNull)
+  parentComment Comment?          @relation("NestedReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies       Comment[]         @relation("NestedReplies")
+  reactions     CommentReaction[]
+
+  isActive  Boolean  @default(true) @map("is_active")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("comments")
+}
+
+model CommentReaction {
+  id        Int          @id @default(autoincrement())
+  commentId String       @map("comment_id")
+  userId    String?      @map("user_id")
+  voterId   String?      @map("voter_id")
+  type      ReactionType
+
+  comment Comment @relation(fields: [commentId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@unique([commentId, userId, type])
+  @@map("comment_reactions")
+}
+
+// -------------------------------------------------------------
+// NHOM 5: LO TRINH, PHIEN BAN VA CHANGELOG (MODELS 19 - 22)
+// -------------------------------------------------------------
+
+model RoadmapView {
+  id           Int     @id @default(autoincrement())
+  workspaceId  String  @map("workspace_id")
+  name         String
+  slug         String
+  isDefault    Boolean @default(false) @map("is_default")
+  columnConfig Json    @default("[]") @map("column_config")
+
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  isActive  Boolean  @default(true) @map("is_active")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@unique([workspaceId, slug])
+  @@map("roadmap_views")
+}
+
+model ReleaseVersion {
+  id          String    @id @default(uuid())
+  workspaceId String    @map("workspace_id")
+  versionName String    @map("version_name")
+  targetDate  DateTime? @map("target_date")
+  releasedAt  DateTime? @map("released_at")
+  isPublished Boolean   @default(false) @map("is_published")
+
+  workspace Workspace     @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  items     ReleaseItem[]
+  changelog Changelog?
+
+  isActive  Boolean  @default(true) @map("is_active")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@unique([workspaceId, versionName])
+  @@map("release_versions")
+}
+
+model ReleaseItem {
+  id               Int     @id @default(autoincrement())
+  releaseVersionId String  @map("release_version_id")
+  postId           String  @map("post_id")
+  completedNote    String? @map("completed_note")
+
+  releaseVersion ReleaseVersion @relation(fields: [releaseVersionId], references: [id], onDelete: Cascade)
+  post           Post           @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@unique([releaseVersionId, postId])
+  @@map("release_items")
+}
+
+model Changelog {
+  id               String    @id @default(uuid())
+  workspaceId      String    @map("workspace_id")
+  releaseVersionId String?   @unique @map("release_version_id")
+  title            String
+  slug             String
+  summary          String    @db.Text
+  bodyMarkdown     String    @map("body_markdown") @db.Text
+  isPublished      Boolean   @default(false) @map("is_published")
+  publishedAt      DateTime? @map("published_at")
+
+  workspace      Workspace       @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  releaseVersion ReleaseVersion? @relation(fields: [releaseVersionId], references: [id], onDelete: SetNull)
+
+  isActive  Boolean  @default(true) @map("is_active")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@unique([workspaceId, slug])
+  @@map("changelogs")
+}
+
+// -------------------------------------------------------------
+// NHOM 6: THONG BAO, WEBHOOK VA KIEM TOAN (MODELS 23 - 26)
+// -------------------------------------------------------------
+
+model PostSubscription {
+  id             Int     @id @default(autoincrement())
+  postId         String  @map("post_id")
+  voterProfileId String  @map("voter_profile_id")
+  notifyEmail    Boolean @default(true) @map("notify_email")
+  notifyInApp    Boolean @default(true) @map("notify_in_app")
+
+  post         Post         @relation(fields: [postId], references: [id], onDelete: Cascade)
+  voterProfile VoterProfile @relation(fields: [voterProfileId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@unique([postId, voterProfileId])
+  @@map("post_subscriptions")
+}
+
+model Notification {
+  id        String           @id @default(uuid())
+  userId    String           @map("user_id")
+  type      NotificationType
+  title     String
+  message   String           @db.Text
+  actionUrl String?          @map("action_url")
+  isRead    Boolean          @default(false) @map("is_read")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([userId, isRead])
+  @@map("notifications")
+}
+
+model WebhookSubscription {
+  id          String         @id @default(uuid())
+  workspaceId String         @map("workspace_id")
+  targetUrl   String         @map("target_url")
+  secretKey   String         @map("secret_key")
+  events      WebhookEvent[]
+
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  isActive  Boolean  @default(true) @map("is_active")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("webhook_subscriptions")
+}
+
+model AuditLog {
+  id          Int     @id @default(autoincrement())
+  workspaceId String  @map("workspace_id")
+  userId      String? @map("user_id")
+  action      String
+  entityType  String  @map("entity_type")
+  entityId    String  @map("entity_id")
+  details     Json    @default("{}")
+  ipAddress   String? @map("ip_address")
+
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  user      User?     @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([workspaceId, entityType, entityId])
+  @@map("audit_logs")
 }

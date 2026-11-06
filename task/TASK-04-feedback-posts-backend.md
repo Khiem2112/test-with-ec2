@@ -5,7 +5,7 @@
 - Governing Technical Spec: [specs/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/feedback-posts/specs/v1.md)
 - Implementation Plan: [implementation-plans/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/feedback-posts/implementation-plans/v1.md)
 - Scope: backend
-- Status: Pending
+- Status: Completed
 
 ## Flow & Spec Traceability
 
@@ -42,14 +42,14 @@ Implement strict domain models, Zod validation schemas, board hierarchy querying
 
 ## Checklist
 
-- [ ] Create `src/types/post.ts` defining strict types for Board, Category, Tag, PostTag, Post, and PostAttachment according to Spec Section 2.
-- [ ] Create `src/schemas/post.schema.ts` defining Zod validation schemas for post submission, attachment metadata (validating mime types PNG, JPG, WEBP, PDF and fileSize <= 10MB), and similarity search query params.
-- [ ] Implement `src/services/board.service.ts` providing hierarchical retrieval of active boards, categories, and tags scoped by workspaceId.
-- [ ] Implement `src/services/deduplication.service.ts` calculating text similarity (Levenshtein distance and token match) against post titles within the same board, returning similarityScore in under 200ms (Spec AC-02, Flow Step Configuration).
-- [ ] Implement `src/services/post.service.ts` with createPost handling tag associations, attachment persistence, and moderation status based on board.isModerated (Spec AC-03, AC-05).
-- [ ] Implement atomic auto-subscription in `post.service.ts` registering the author into `post_subscriptions` with notifyInApp = true and notifyEmail = true (Spec AC-04, Flow Step Confirmation).
-- [ ] Ensure all exported functions contain explicit return type annotations and zero any types.
-- [ ] Run `npm run check:be` and verify exit code 0.
+- [x] Create `src/types/post.ts` defining strict types for Board, Category, Tag, PostTag, Post, and PostAttachment according to Spec Section 2.
+- [x] Create `src/schemas/post.schema.ts` defining Zod validation schemas for post submission, attachment metadata (validating mime types PNG, JPG, WEBP, PDF and fileSize <= 10MB), and similarity search query params.
+- [x] Implement `src/services/board.service.ts` providing hierarchical retrieval of active boards, categories, and tags scoped by workspaceId.
+- [x] Implement `src/services/deduplication.service.ts` calculating text similarity (Levenshtein distance and token match) against post titles within the same board, returning similarityScore in under 200ms (Spec AC-02, Flow Step Configuration).
+- [x] Implement `src/services/post.service.ts` with createPost handling tag associations, attachment persistence, and moderation status based on board.isModerated (Spec AC-03, AC-05).
+- [x] Implement atomic auto-subscription in `post.service.ts` registering the author into `post_subscriptions` with notifyInApp = true and notifyEmail = true (Spec AC-04, Flow Step Confirmation).
+- [x] Ensure all exported functions contain explicit return type annotations and zero any types.
+- [x] Run `npm run check:be` and verify exit code 0.
 
 ## Acceptance Criteria
 
