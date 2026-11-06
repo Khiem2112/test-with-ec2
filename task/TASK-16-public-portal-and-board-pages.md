@@ -4,7 +4,7 @@
 - Governing Flow: [docs/feedback-posts/flows/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/feedback-posts/flows/v1.md)
 - Governing Spec: [docs/feedback-posts/specs/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/feedback-posts/specs/v1.md)
 - Scope: frontend
-- Status: Pending
+- Status: Completed
 
 ## Flow and Spec Traceability
 
@@ -40,12 +40,12 @@ Build the App Router layout and pages for the public feedback portal, wiring the
 
 ## Checklist
 
-- [ ] Implement `src/app/[workspaceSlug]/layout.tsx` fetching workspace data by slug, rendering PublicHeader with workspace branding, and handling 404 for invalid slugs.
-- [ ] Implement `src/app/[workspaceSlug]/page.tsx` displaying the workspace portal welcome banner, search bar, and grid of active boards.
-- [ ] Implement `src/app/[workspaceSlug]/boards/[boardSlug]/page.tsx` as a Server Component fetching board details, categories, tags, and initial posts, rendering BoardFeedView.
-- [ ] Update `src/components/posts/board-feed-view.tsx` to match the Linear dark design system tokens (dark panels, hairline borders, lavender accents).
-- [ ] Wire `PostSubmissionDialog` within the board page, triggering real-time `/api/v1/posts/search-similar` and submitting to `/api/v1/posts` or Server Action.
-- [ ] Run `npm run check` and verify exit code 0.
+- [x] Implement `src/app/[workspaceSlug]/layout.tsx` fetching workspace data by slug, rendering PublicHeader with workspace branding, and handling 404 for invalid slugs.
+- [x] Implement `src/app/[workspaceSlug]/page.tsx` displaying the workspace portal welcome banner, search bar, and grid of active boards.
+- [x] Implement `src/app/[workspaceSlug]/boards/[boardSlug]/page.tsx` as a Server Component fetching board details, categories, tags, and initial posts, rendering BoardFeedView.
+- [x] Update `src/components/posts/board-feed-view.tsx` to match the Linear dark design system tokens (dark panels, hairline borders, lavender accents).
+- [x] Wire `PostSubmissionDialog` within the board page, triggering real-time `/api/v1/posts/search-similar` and submitting to `/api/v1/posts` or Server Action.
+- [x] Run `npm run check` and verify exit code 0.
 
 ## Acceptance Criteria
 

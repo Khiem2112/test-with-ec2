@@ -43,7 +43,6 @@ export const PostSubmissionDialog = ({
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [confirmationNotice, setConfirmationNotice] = useState<string | null>(null);
 
-  // Debounced search for similar posts
   useEffect(() => {
     if (!title || title.trim().length < 3) {
       setSimilarPosts([]);
@@ -55,7 +54,7 @@ export const PostSubmissionDialog = ({
     const handler = setTimeout(async () => {
       try {
         const response = await fetch(
-          `/api/v1/posts/search-similar?boardId=${boardId}&q=${encodeURIComponent(title.trim())}`,
+          `/api/v1/posts/search-similar?boardId=${boardId}&q=${encodeURIComponent(title.trim())}`
         );
         const result = (await response.json()) as {
           success: boolean;
@@ -65,7 +64,7 @@ export const PostSubmissionDialog = ({
         if (response.ok && result.success && result.data && result.data.length > 0) {
           setSimilarPosts(result.data);
           const exact = result.data.some(
-            (p) => p.title.toLowerCase().trim() === title.toLowerCase().trim(),
+            (p) => p.title.toLowerCase().trim() === title.toLowerCase().trim()
           );
           setIsExactMatch(exact);
           setShowSuggestions(true);
@@ -98,36 +97,31 @@ export const PostSubmissionDialog = ({
         onClose();
       }, 1000);
     } catch {
-      setErrorMessage("Khong the bo phieu luc nay");
+      setErrorMessage("Khong the bo phieu cho bai dang da co");
     }
   };
 
+  const handleToggleTag = (tagId: number): void => {
+    setSelectedTagIds((prev) =>
+      prev.includes(tagId) ? prev.filter((id) => id !== tagId) : [...prev, tagId]
+    );
+  };
+
   const handleAddAttachment = (): void => {
-    if (!attachmentName || !attachmentUrl) {
-      return;
-    }
-    if (attachmentSize > 10 * 1024 * 1024) {
-      setErrorMessage("Dung luong tep dinh kem vuot qua gioi han 10MB");
+    if (!attachmentName.trim() || !attachmentUrl.trim()) {
       return;
     }
     setAttachments((prev) => [
       ...prev,
       {
-        fileName: attachmentName,
-        fileUrl: attachmentUrl,
+        fileName: attachmentName.trim(),
+        fileUrl: attachmentUrl.trim(),
         fileSize: attachmentSize,
         mimeType: attachmentMime,
       },
     ]);
     setAttachmentName("");
     setAttachmentUrl("");
-    setErrorMessage(null);
-  };
-
-  const handleToggleTag = (tagId: number): void => {
-    setSelectedTagIds((prev) =>
-      prev.includes(tagId) ? prev.filter((id) => id !== tagId) : [...prev, tagId],
-    );
   };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
@@ -171,27 +165,27 @@ export const PostSubmissionDialog = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 overflow-y-auto">
-      <div className={cn("w-full max-w-2xl bg-white rounded-lg shadow-xl p-6 my-8", className)}>
-        <div className="flex items-center justify-between pb-3 border-b border-gray-200">
-          <h2 className="text-lg font-bold text-gray-900">Dong Gop Y Kien Moi</h2>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-xs p-4 overflow-y-auto">
+      <div className={cn("w-full max-w-2xl bg-[#0f1011] border border-[#23252a] rounded-xl shadow-2xl p-6 my-8 text-[#f7f8f8]", className)}>
+        <div className="flex items-center justify-between pb-3 border-b border-[#23252a]">
+          <h2 className="text-base font-bold text-[#f7f8f8]">Dong Gop Y Kien Moi</h2>
           <button
             type="button"
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 text-sm font-bold px-2 py-1 cursor-pointer"
+            className="text-[#8a8f98] hover:text-[#f7f8f8] text-xs font-semibold px-2 py-1 cursor-pointer transition-colors"
           >
             Dong
           </button>
         </div>
 
         {confirmationNotice && (
-          <div className="mt-3 p-3 text-sm text-green-700 bg-green-50 border border-green-300 rounded">
+          <div className="mt-3 p-3 text-xs text-[#27a644] bg-[#27a644]/10 border border-[#27a644]/30 rounded-lg">
             {confirmationNotice}
           </div>
         )}
 
         {errorMessage && (
-          <div className="mt-3 p-3 text-sm text-red-700 bg-red-50 border border-red-300 rounded" role="alert">
+          <div className="mt-3 p-3 text-xs text-red-400 bg-red-950/20 border border-red-800/40 rounded-lg" role="alert">
             {errorMessage}
           </div>
         )}
@@ -209,7 +203,7 @@ export const PostSubmissionDialog = ({
 
         <form onSubmit={handleSubmit} className="mt-4 space-y-4">
           <div>
-            <label htmlFor="post-title" className="block text-xs font-semibold text-gray-700 uppercase">
+            <label htmlFor="post-title" className="block text-[11px] font-semibold text-[#8a8f98] uppercase tracking-wider mb-1">
               Tieu De Gop Y
             </label>
             <input
@@ -218,15 +212,15 @@ export const PostSubmissionDialog = ({
               required
               value={title}
               onChange={(e: ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
-              placeholder="Tom tat ngan gon y tuong hoac loi can bao..."
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
+              placeholder="Tom tat ngan gon y tuong hoac van de can cai thien..."
+              className="block w-full px-3 py-2 bg-[#141516] border border-[#23252a] rounded-lg text-xs text-[#f7f8f8] placeholder-[#62666d] focus:outline-hidden focus:border-[#5e6ad2]"
             />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {categories.length > 0 && (
               <div>
-                <label htmlFor="post-category" className="block text-xs font-semibold text-gray-700 uppercase">
+                <label htmlFor="post-category" className="block text-[11px] font-semibold text-[#8a8f98] uppercase tracking-wider mb-1">
                   Danh Muc
                 </label>
                 <select
@@ -235,7 +229,7 @@ export const PostSubmissionDialog = ({
                   onChange={(e: ChangeEvent<HTMLSelectElement>) =>
                     setCategoryId(e.target.value ? Number(e.target.value) : undefined)
                   }
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded text-sm bg-white"
+                  className="block w-full px-3 py-2 bg-[#141516] border border-[#23252a] rounded-lg text-xs text-[#d0d6e0] focus:outline-hidden focus:border-[#5e6ad2]"
                 >
                   <option value="">Chon danh muc (tuy chon)</option>
                   {categories.map((c) => (
@@ -249,7 +243,7 @@ export const PostSubmissionDialog = ({
 
             {tags.length > 0 && (
               <div>
-                <span className="block text-xs font-semibold text-gray-700 uppercase mb-1">
+                <span className="block text-[11px] font-semibold text-[#8a8f98] uppercase tracking-wider mb-1">
                   Gan The (Tags)
                 </span>
                 <div className="flex flex-wrap gap-1.5 mt-1">
@@ -261,10 +255,10 @@ export const PostSubmissionDialog = ({
                         type="button"
                         onClick={() => handleToggleTag(t.id)}
                         className={cn(
-                          "px-2 py-1 text-xs rounded border transition-colors cursor-pointer",
+                          "px-2 py-1 text-xs rounded-md border transition-colors cursor-pointer",
                           isSelected
-                            ? "bg-blue-600 text-white border-blue-600 font-semibold"
-                            : "bg-gray-100 text-gray-700 border-gray-300 hover:bg-gray-200",
+                            ? "bg-[#5e6ad2] text-white border-[#5e6ad2] font-semibold"
+                            : "bg-[#141516] text-[#8a8f98] border-[#23252a] hover:bg-[#18191a]"
                         )}
                       >
                         {t.name}
@@ -277,7 +271,7 @@ export const PostSubmissionDialog = ({
           </div>
 
           <div>
-            <label htmlFor="post-content" className="block text-xs font-semibold text-gray-700 uppercase">
+            <label htmlFor="post-content" className="block text-[11px] font-semibold text-[#8a8f98] uppercase tracking-wider mb-1">
               Mo Ta Chi Tiet (Ho tro Markdown)
             </label>
             <textarea
@@ -287,14 +281,13 @@ export const PostSubmissionDialog = ({
               value={content}
               onChange={(e: ChangeEvent<HTMLTextAreaElement>) => setContent(e.target.value)}
               placeholder="Trinh bay chi tiet van de, boi canh su dung va giai phap de xuat..."
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 font-sans"
+              className="block w-full px-3 py-2 bg-[#141516] border border-[#23252a] rounded-lg text-xs text-[#f7f8f8] placeholder-[#62666d] focus:outline-hidden focus:border-[#5e6ad2] font-sans"
             />
           </div>
 
-          {/* Attachments Section */}
-          <div className="p-3 bg-gray-50 border border-gray-200 rounded text-xs space-y-2">
-            <span className="font-semibold text-gray-700 uppercase block">
-              Tep Dinh Kem (Toi da 10MB moi tep)
+          <div className="p-3 bg-[#141516] border border-[#23252a] rounded-lg text-xs space-y-2">
+            <span className="font-semibold text-[#8a8f98] uppercase block text-[10px] tracking-wider">
+              Tep Dinh Kem
             </span>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
               <input
@@ -302,20 +295,20 @@ export const PostSubmissionDialog = ({
                 placeholder="Ten tep (vd: screenshot.png)"
                 value={attachmentName}
                 onChange={(e) => setAttachmentName(e.target.value)}
-                className="px-2 py-1 border border-gray-300 rounded bg-white text-xs"
+                className="px-2.5 py-1.5 bg-[#18191a] border border-[#23252a] rounded-md text-xs text-[#f7f8f8] placeholder-[#62666d]"
               />
               <input
                 type="url"
                 placeholder="URL anh/tep"
                 value={attachmentUrl}
                 onChange={(e) => setAttachmentUrl(e.target.value)}
-                className="px-2 py-1 border border-gray-300 rounded bg-white text-xs"
+                className="px-2.5 py-1.5 bg-[#18191a] border border-[#23252a] rounded-md text-xs text-[#f7f8f8] placeholder-[#62666d]"
               />
-              <div className="flex gap-1">
+              <div className="flex gap-1.5">
                 <select
                   value={attachmentMime}
                   onChange={(e) => setAttachmentMime(e.target.value as typeof attachmentMime)}
-                  className="px-2 py-1 border border-gray-300 rounded bg-white text-xs"
+                  className="px-2 py-1.5 bg-[#18191a] border border-[#23252a] rounded-md text-xs text-[#d0d6e0]"
                 >
                   <option value="image/png">PNG</option>
                   <option value="image/jpeg">JPG</option>
@@ -325,7 +318,7 @@ export const PostSubmissionDialog = ({
                 <button
                   type="button"
                   onClick={handleAddAttachment}
-                  className="px-2 py-1 bg-gray-800 text-white rounded text-xs cursor-pointer"
+                  className="px-3 py-1.5 bg-[#23252a] hover:bg-[#34343a] text-[#f7f8f8] rounded-md text-xs cursor-pointer transition-colors"
                 >
                   Them
                 </button>
@@ -335,12 +328,12 @@ export const PostSubmissionDialog = ({
             {attachments.length > 0 && (
               <div className="mt-2 space-y-1">
                 {attachments.map((att, idx) => (
-                  <div key={idx} className="flex items-center justify-between text-[11px] text-gray-600 bg-white p-1.5 border rounded">
+                  <div key={idx} className="flex items-center justify-between text-[11px] text-[#8a8f98] bg-[#18191a] p-1.5 border border-[#23252a] rounded-md">
                     <span>{att.fileName} ({Math.round(att.fileSize / 1024)} KB) - {att.mimeType}</span>
                     <button
                       type="button"
                       onClick={() => setAttachments((prev) => prev.filter((_, i) => i !== idx))}
-                      className="text-red-600 hover:text-red-800"
+                      className="text-red-400 hover:text-red-300"
                     >
                       Xoa
                     </button>
@@ -350,18 +343,18 @@ export const PostSubmissionDialog = ({
             )}
           </div>
 
-          <div className="flex justify-end gap-3 pt-3 border-t border-gray-200">
+          <div className="flex justify-end gap-3 pt-3 border-t border-[#23252a]">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 border border-gray-300 rounded text-sm text-gray-700 hover:bg-gray-50 cursor-pointer"
+              className="px-4 py-2 border border-[#23252a] bg-[#141516] rounded-md text-xs font-medium text-[#8a8f98] hover:text-[#f7f8f8] hover:bg-[#18191a] cursor-pointer transition-colors"
             >
               Huy
             </button>
             <button
               type="submit"
               disabled={isLoading || !title || !content}
-              className="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded text-sm font-semibold disabled:opacity-50 cursor-pointer"
+              className="px-5 py-2 bg-[#5e6ad2] hover:bg-[#828fff] text-white rounded-md text-xs font-semibold disabled:opacity-50 cursor-pointer transition-colors"
             >
               {isLoading ? "Dang gui..." : "Gui Gop Y"}
             </button>
