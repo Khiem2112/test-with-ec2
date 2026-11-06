@@ -4,7 +4,7 @@
 - Governing Flow: [docs/roadmap-and-releases/flows/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/roadmap-and-releases/flows/v1.md)
 - Governing Spec: [docs/roadmap-and-releases/specs/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/roadmap-and-releases/specs/v1.md)
 - Scope: frontend
-- Status: Pending
+- Status: Completed
 
 ## Flow and Spec Traceability
 
@@ -34,12 +34,12 @@ Implement public pages for the Interactive Roadmap Kanban and the Release Change
 
 ## Checklist
 
-- [ ] Implement `src/app/[workspaceSlug]/roadmap/page.tsx` fetching roadmap columns and associated posts via roadmap.service.ts.
-- [ ] Connect `KanbanBoard` and `KanbanCard` rendering columns with custom status colors, item count badges, and click-through navigation to post detail.
-- [ ] Restyle Kanban board to match the Linear dark design system (horizontal scroll on mobile, charcoal surface columns, hairline borders).
-- [ ] Implement `src/app/[workspaceSlug]/changelog/page.tsx` fetching published releases and associated changelogs.
-- [ ] Render changelog feed with version badges, release dates, rendered markdown release notes, and linked feature tags.
-- [ ] Run `npm run check` and verify exit code 0.
+- [x] Implement `src/app/[workspaceSlug]/roadmap/page.tsx` fetching roadmap columns and associated posts via roadmap.service.ts.
+- [x] Connect `KanbanBoard` and `KanbanCard` rendering columns with custom status colors, item count badges, and click-through navigation to post detail.
+- [x] Restyle Kanban board to match the Linear dark design system (horizontal scroll on mobile, charcoal surface columns, hairline borders).
+- [x] Implement `src/app/[workspaceSlug]/changelog/page.tsx` fetching published releases and associated changelogs.
+- [x] Render changelog feed with version badges, release dates, rendered markdown release notes, and linked feature tags.
+- [x] Run `npm run check` and verify exit code 0.
 
 ## Acceptance Criteria
 
