@@ -4,7 +4,7 @@
 - Governing Flow: All 6 Operational Flows in [docs/](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs)
 - Governing Spec: All 6 Technical Specifications in [docs/](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs)
 - Scope: shared
-- Status: Pending
+- Status: Completed
 
 ## Flow and Spec Traceability
 
@@ -33,13 +33,13 @@ Deliver the Release Management and Webhook configuration pages, update Task Queu
 
 ## Checklist
 
-- [ ] Implement `src/app/admin/workspaces/[slug]/releases/page.tsx` displaying existing release versions, modal to create new release version, and embedding ChangelogEditor for drafting notes.
-- [ ] Implement `src/app/admin/workspaces/[slug]/webhooks/page.tsx` displaying registered webhook subscriptions, secret generator, event checkboxes, and manual ping test button.
-- [ ] Update `task/README.md` adding TASK-15 through TASK-20 to the progress tracking table with accurate scope and links.
-- [ ] Execute `npm run check:be` (typecheck) and verify exit code 0.
-- [ ] Execute `npm run check:fe` (build and lint) and verify exit code 0.
-- [ ] Audit repository files ensuring zero icons, emojis, and numbered comments are present.
-- [ ] Run overall `npm run check` and confirm complete verification gate passes with exit code 0.
+- [x] Implement `src/app/admin/workspaces/[slug]/releases/page.tsx` displaying existing release versions, modal to create new release version, and embedding ChangelogEditor for drafting notes.
+- [x] Implement `src/app/admin/workspaces/[slug]/webhooks/page.tsx` displaying registered webhook subscriptions, secret generator, event checkboxes, and manual ping test button.
+- [x] Update `task/README.md` adding TASK-15 through TASK-20 to the progress tracking table with accurate scope and links.
+- [x] Execute `npm run check:be` (typecheck) and verify exit code 0.
+- [x] Execute `npm run check:fe` (build and lint) and verify exit code 0.
+- [x] Audit repository files ensuring zero icons, emojis, and numbered comments are present.
+- [x] Run overall `npm run check` and confirm complete verification gate passes with exit code 0.
 
 ## Acceptance Criteria
 
