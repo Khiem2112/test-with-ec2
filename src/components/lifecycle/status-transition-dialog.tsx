@@ -77,47 +77,47 @@ export const StatusTransitionDialog = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-      <div className={cn("w-full max-w-lg bg-white rounded-lg shadow-xl p-6", className)}>
-        <div className="flex items-center justify-between pb-3 border-b border-gray-200">
-          <h2 className="text-lg font-bold text-gray-900">Chuyen Doi Trang Thai Tinh Nang</h2>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-xs p-4">
+      <div className={cn("w-full max-w-lg bg-[#0f1011] border border-[#23252a] rounded-xl shadow-2xl p-6 text-[#f7f8f8]", className)}>
+        <div className="flex items-center justify-between pb-3 border-b border-[#23252a]">
+          <h2 className="text-base font-bold text-[#f7f8f8]">Chuyen Doi Trang Thai Tinh Nang</h2>
           <button
             type="button"
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 text-sm font-bold px-2 py-1 cursor-pointer"
+            className="text-[#8a8f98] hover:text-[#f7f8f8] text-xs font-semibold px-2 py-1 cursor-pointer transition-colors"
           >
             Dong
           </button>
         </div>
 
         {errorMessage && (
-          <div className="mt-3 p-3 text-xs text-red-700 bg-red-50 border border-red-300 rounded" role="alert">
+          <div className="mt-3 p-3 text-xs text-red-400 bg-red-950/20 border border-red-800/40 rounded-lg" role="alert">
             {errorMessage}
           </div>
         )}
 
         <form onSubmit={handleSubmit} className="mt-4 space-y-4">
           <div>
-            <label htmlFor="target-status" className="block text-xs font-semibold text-gray-700 uppercase">
-              Chon Trang Thai Moi
+            <label htmlFor="new-status" className="block text-[11px] font-semibold text-[#8a8f98] uppercase tracking-wider mb-1">
+              Trang Thai Dich
             </label>
             <select
-              id="target-status"
+              id="new-status"
               value={selectedStatusId}
               onChange={(e) => setSelectedStatusId(Number(e.target.value))}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded text-sm bg-white"
+              className="block w-full px-3 py-2 bg-[#141516] border border-[#23252a] rounded-lg text-xs text-[#f7f8f8] focus:outline-hidden focus:border-[#5e6ad2]"
             >
-              {statuses.map((s) => (
-                <option key={s.id} value={s.id}>
-                  {s.name} ({s.category})
+              {statuses.map((status) => (
+                <option key={status.id} value={status.id}>
+                  {status.name} ({status.category})
                 </option>
               ))}
             </select>
           </div>
 
           <div>
-            <label htmlFor="change-note" className="block text-xs font-semibold text-gray-700 uppercase">
-              Ghi Chu Ly Do Chuyen Doi (Change Note)
+            <label htmlFor="change-note" className="block text-[11px] font-semibold text-[#8a8f98] uppercase tracking-wider mb-1">
+              Ghi Chu Chuyen Trang Thai (Gui toi nguoi theo doi)
             </label>
             <textarea
               id="change-note"
@@ -125,40 +125,38 @@ export const StatusTransitionDialog = ({
               rows={3}
               value={changeNote}
               onChange={(e) => setChangeNote(e.target.value)}
-              placeholder="Giai thich ro ly do cap nhat tien do hoac ke hoach sprint..."
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
+              placeholder="Giai thich ly do chuyen trang thai, lo trinh du kien..."
+              className="block w-full px-3 py-2 bg-[#141516] border border-[#23252a] rounded-lg text-xs text-[#f7f8f8] placeholder-[#62666d] focus:outline-hidden focus:border-[#5e6ad2] font-sans"
             />
           </div>
 
-          <div className="p-3 bg-blue-50 border border-blue-200 rounded text-xs space-y-2">
-            <label className="flex items-center gap-2 cursor-pointer font-medium text-blue-900">
-              <input
-                type="checkbox"
-                checked={notifySubscribers}
-                onChange={(e) => setNotifySubscribers(e.target.checked)}
-                className="rounded border-gray-300 text-blue-600"
-              />
-              Tu dong gui thong bao tien do den nguoi theo doi
+          <div className="flex items-center gap-2 p-3 bg-[#141516] border border-[#23252a] rounded-lg">
+            <input
+              id="notify-subscribers"
+              type="checkbox"
+              checked={notifySubscribers}
+              onChange={(e) => setNotifySubscribers(e.target.checked)}
+              className="rounded border-[#23252a] bg-[#18191a] text-[#5e6ad2]"
+            />
+            <label htmlFor="notify-subscribers" className="text-xs text-[#d0d6e0] cursor-pointer">
+              Thong bao cho {subscriberCount} nguoi dung dang theo doi chu de nay
             </label>
-            <p className="text-[11px] text-blue-700">
-              Uoc tinh co {subscriberCount} nguoi dung (voters va commenters) se nhan duoc thong bao qua in-app va email khi trang thai thay doi.
-            </p>
           </div>
 
-          <div className="flex justify-end gap-2 pt-2 border-t border-gray-200">
+          <div className="flex justify-end gap-3 pt-3 border-t border-[#23252a]">
             <button
               type="button"
               onClick={onClose}
-              className="px-3 py-1.5 text-xs font-medium text-gray-700 border border-gray-300 rounded hover:bg-gray-50 cursor-pointer"
+              className="px-4 py-2 border border-[#23252a] bg-[#141516] rounded-md text-xs font-medium text-[#8a8f98] hover:text-[#f7f8f8] hover:bg-[#18191a] cursor-pointer transition-colors"
             >
               Huy
             </button>
             <button
               type="submit"
               disabled={isSubmitting || !changeNote.trim()}
-              className="px-4 py-1.5 text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 rounded disabled:opacity-50 cursor-pointer"
+              className="px-5 py-2 bg-[#5e6ad2] hover:bg-[#828fff] text-white rounded-md text-xs font-semibold disabled:opacity-50 cursor-pointer transition-colors"
             >
-              {isSubmitting ? "Dang luu..." : "Cap Nhat Trang Thai"}
+              {isSubmitting ? "Dang cap nhat..." : "Xac Nhan Chuyen"}
             </button>
           </div>
         </form>

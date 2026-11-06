@@ -4,7 +4,7 @@
 - Governing Flow: [docs/workspace-identity/flows/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/workspace-identity/flows/v1.md), [docs/post-lifecycle-merge/flows/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/post-lifecycle-merge/flows/v1.md)
 - Governing Spec: [docs/post-lifecycle-merge/specs/v1.md](file:///c:/University/Study/Programming/auto-flow/mock-projects/proj-1/docs/post-lifecycle-merge/specs/v1.md)
 - Scope: frontend
-- Status: Pending
+- Status: Completed
 
 ## Flow and Spec Traceability
 
@@ -42,13 +42,13 @@ Build the Admin Console layout and administrative operation screens, wiring work
 
 ## Checklist
 
-- [ ] Implement `src/app/admin/workspaces/[slug]/layout.tsx` embedding AdminSidebar, checking administrative authorization, and providing workspace context.
-- [ ] Implement `src/app/admin/workspaces/[slug]/settings/page.tsx` with forms for workspace name, custom domain, branding color, and public portal visibility toggle.
-- [ ] Implement `src/app/admin/workspaces/[slug]/members/page.tsx` embedding TeamMembersDrawer and staff members listing.
-- [ ] Implement `src/app/admin/workspaces/[slug]/moderation/page.tsx` displaying pending posts on moderated boards with single-click approve and reject actions.
-- [ ] Connect `StatusTransitionDialog` and `MergeDrawer` into admin post actions, wiring `/api/v1/posts/[id]/status` and `/api/v1/posts/[id]/merge`.
-- [ ] Implement `src/app/admin/workspaces/[slug]/audit/page.tsx` embedding AuditLogTable with event filtering and actor identification.
-- [ ] Run `npm run check` and verify exit code 0.
+- [x] Implement `src/app/admin/workspaces/[slug]/layout.tsx` embedding AdminSidebar, checking administrative authorization, and providing workspace context.
+- [x] Implement `src/app/admin/workspaces/[slug]/settings/page.tsx` with forms for workspace name, custom domain, branding color, and public portal visibility toggle.
+- [x] Implement `src/app/admin/workspaces/[slug]/members/page.tsx` embedding TeamMembersDrawer and staff members listing.
+- [x] Implement `src/app/admin/workspaces/[slug]/moderation/page.tsx` displaying pending posts on moderated boards with single-click approve and reject actions.
+- [x] Connect `StatusTransitionDialog` and `MergeDrawer` into admin post actions, wiring `/api/v1/posts/[id]/status` and `/api/v1/posts/[id]/merge`.
+- [x] Implement `src/app/admin/workspaces/[slug]/audit/page.tsx` embedding AuditLogTable with event filtering and actor identification.
+- [x] Run `npm run check` and verify exit code 0.
 
 ## Acceptance Criteria
 
